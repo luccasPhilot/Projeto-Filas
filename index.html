@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fila</title>
+    <link rel="stylesheet" href="CSS/alert.css">
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/prontos.css">
     <link rel="stylesheet" href="CSS/proximos.css">
@@ -26,12 +26,26 @@
             <h1>Restaurante</h1>
         </nav>
     </header>
+
+    <!--alert-->
+    <div id="customAlert" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" class="close">&times;</span>
+            <p id="alert-frase">Informe sua senha:</p>
+            <input type="text" id="numericCode" placeholder="Código numérico">
+            <button id="cancelBtn" class="cancel-btn">Cancelar</button>
+            <button id="confirmBtn">Confirmar</button>
+        </div>
+    </div>
+
     <div class="container-prontos">
-        <p>Prontos</p>
+        <p class="titulo-prontos">Prontos</p>
         <div class="chamando">
             <p>100</p>
+            <span>5 minutos atrás</span>
         </div>
-        <ul class="prontos">
+        <div class="prontos-scroll">
+            <ul class="prontos">
             <li class="pedidos-prontos">
                 <p>090</p>
             </li>
@@ -48,6 +62,8 @@
                 <p>050</p>
             </li>
         </ul>
+        </div>
+        
     </div>
     <div class="container-proximos">
         <p class="titulo-proximos">Proximos</p>
@@ -57,7 +73,7 @@
                     <p>1º</p>
                 </div>
                 <p>Luccas</p>
-                <img src="./img/Sino.png" alt="alerta">
+                <img src="./img/Sino.png" alt="alerta" cl>
             </li>
             <li class="filas">
                 <div class="lugar">
