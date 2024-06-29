@@ -1,0 +1,42 @@
+.container-proximos{
+    width: 75%;
+    margin: 10px auto 0;
+    padding: 10px;
+    background-color: aqua;
+}
+
+.filas {
+    font-size: 16px;
+    width: 70%;
+    background-color: #f2f2f2;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-radius: 10px;
+    margin: 10px auto 0;
+    margin-bottom: 20px;
+    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
+}
+
+.lugar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    background-color: gray;
+    border-radius: 5px;
+    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
+}
+
+.titulo-proximos{
+    margin-left: 50px;
+    font-size: 18px;
+}
+
+.container-proximos img{
+    width: 20px;
+    height: 20px;
+}
