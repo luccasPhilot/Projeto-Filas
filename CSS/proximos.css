@@ -1,13 +1,12 @@
-.container-proximos{
-    width: 75%;
-    margin: 10px auto 0;
-    padding: 10px;
-    background-color: aqua;
+.container-proximos {
+    width: 90%;
+    margin: 0px auto 0;
+    padding: 0px 20px 0px;
 }
 
 .filas {
     font-size: 16px;
-    width: 70%;
+    width: 100%;
     background-color: #f2f2f2;
     height: 70px;
     display: flex;
@@ -17,26 +16,39 @@
     border-radius: 10px;
     margin: 10px auto 0;
     margin-bottom: 20px;
-    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
+    border: 1px solid #e0e0e0;
 }
 
-.lugar{
+.lugar {
     display: flex;
+    color: #fff;
     align-items: center;
     justify-content: center;
     height: 35px;
     width: 35px;
-    background-color: gray;
+    background-color: #BE0E19;
     border-radius: 5px;
     box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
 }
 
-.titulo-proximos{
-    margin-left: 50px;
+.titulo-proximos {
+    margin-left: 0;
     font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.container-proximos img{
+.filas img {
     width: 20px;
     height: 20px;
+    opacity: 30%;
+    cursor: pointer;
+}
+
+.invert-on-hover {
+    transition: filter 0.5s ease; /* Adiciona uma transição suave */
+}
+
+.invert-on-hover:hover {
+    opacity: 100%;
 }

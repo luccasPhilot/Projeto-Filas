@@ -1,41 +1,65 @@
-.container-prontos{
-    height: 400px;
-    width: 75%;
-    margin: 10px auto 0;
-    padding: 10px;
-    background-color: aqua;
+.container-prontos {
+    width: 90%; 
+    margin: 0px auto 0px;
+    padding: 5px 20px 20px 20px;
+    height: 350px;
 }
 
-.prontos{
+.prontos-scroll {
     display: flex;
-    justify-content: space-around;
+    overflow-x: auto;
+    padding-bottom: 10px;
 }
 
-.chamando{
+.prontos {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chamando {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #f2f2f2;
+    color: #fff;
     font-size: 80px;
-    background-color: rgb(32, 32, 32);
+    background-color: #BE0E19;
     height: 200px;
-    width: 75%;
-    margin: 10px auto 0;
-    border-radius: 10px;
-    margin-bottom: 50px;
-    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: relative; 
 }
 
+.chamando span {
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #fff;
+}
 
-.pedidos-prontos{
-    border: none;
+.pedidos-prontos {
+    min-width: 80px;
     width: 80px;
     height: 80px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+    margin-right: 10px;
     background-color: #f2f2f2;
-    box-shadow: 1px 4px 10px rgb(0, 0, 0, 0.2);
+    border: 1px solid #e0e0e0;
+}
+
+.titulo-prontos {
+    margin-left: 0;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.prontos-scroll::-webkit-scrollbar {
+    height: 0px; /* altura da barra de rolagem horizontal */
 }
