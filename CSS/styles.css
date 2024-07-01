@@ -7,10 +7,14 @@
     font-weight: 300;
 }
 
+.container-principal{
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
 header {
     width: 100%;
     height: 60px;
-    background-color: gray;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -21,15 +25,28 @@ header h1 {
     font-weight: 600;
 }
 
+.seta{
+    width: 20px;
+    height: 20px;
+}
 .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px 40px;
     width: 100%;
-    background-color: #f2f2f2;
     transition: all 0.5s;
-    position: fixed;
+}
+#logo {
+    margin-right: 140px;
+}
+#rest {
+    font-weight: 300;
+}
+
+.done {
+    background-color: #aaf612;
+    text-decoration: line-through;
 }
 
 /* Estilos padrão para dispositivos móveis
