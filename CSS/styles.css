@@ -44,11 +44,6 @@ header h1 {
     font-weight: 300;
 }
 
-.done {
-    background-color: #aaf612;
-    text-decoration: line-through;
-}
-
 /* Estilos padrão para dispositivos móveis
 body {
     font-size: 14px;

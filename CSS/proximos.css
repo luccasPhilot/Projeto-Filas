@@ -37,14 +37,11 @@
     margin-bottom: 10px;
 }
 
-.filas img {
+.invert-on-hover {
     width: 20px;
     height: 20px;
     opacity: 30%;
     cursor: pointer;
-}
-
-.invert-on-hover {
     transition: filter 0.5s ease; /* Adiciona uma transição suave */
 }
 
