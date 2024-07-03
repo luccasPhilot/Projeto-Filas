@@ -19,7 +19,7 @@ function adicionarNovaTarefa() {
 }
 
 function adicionarAletorio() {
-  const numeroSequencial = minhaListaDeItens.length + 1;
+  const numeroSequencial = (minhaListaDeItens.length * 10) + 100;
   minhaListaDeItens.push({
     tarefa: numeroSequencial,
     concluida: false,
