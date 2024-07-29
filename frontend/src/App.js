@@ -1,25 +1,20 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import UserPage from './components/UserPage'
-import AdminPage from './components/AdminPage'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import UserPage from './components/UserPage';
+import AdminPage from './components/AdminPage';
 
 function App() {
-  
-  const isAdmin = true; 
+  const isAdmin = true; // Aqui você pode implementar uma lógica real para verificar se o usuário é admin.
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/user">
-          <UserPage />
-        </Route>
-        <Route path="/admin">
-          {isAdmin ? <AdminPage /> : <Redirect to="/user" />}
-        </Route>
-        <Redirect from="/" to="/user" />
-      </Switch>
+      <Routes>
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/user" />} />
+        <Route path="*" element={<Navigate to="/user" />} />
+      </Routes>
     </Router>
   );
-};
+}
 
 export default App;

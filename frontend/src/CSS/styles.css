@@ -8,7 +8,6 @@
 }
 
 .container-principal{
-    background-color: #f2f2f2;
     border-radius: 10px;
 }
 
@@ -43,6 +42,7 @@ header h1 {
 #rest {
     font-weight: 300;
 }
+
 
 /* Estilos padrão para dispositivos móveis
 body {

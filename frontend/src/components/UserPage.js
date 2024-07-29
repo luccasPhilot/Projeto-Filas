@@ -1,87 +1,65 @@
+import React, { useState, useEffect } from 'react';
 import '../CSS/alert.css';
 import '../CSS/styles.css';
 import '../CSS/prontos.css';
 import '../CSS/proximos.css';
 
-import { useState, useEffect } from 'react'
-
-import Admin from './admin'
-import Proximo from './proximos'
-import Pronto from './prontos'
+import Pronto from './prontos';
+import Proximo from './proximos';
+import Alerta from './alerta';
 
 function UserPage() {
-
-  const [itens, setItens] = useState([])
+  const [itens, setItens] = useState([]);
 
   function getData() {
-    fetch('http://localhost:3000/fila/list', { method: "GET" })
+    fetch('http://localhost:3000/fila/list', { method: 'GET' })
       .then(response => response.json())
-      .then(data => setItens(data))
+      .then(data => setItens(data));
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <div className="App">
-      <body>
-        <div id="customAlert" class="modal">
-          <div class="modal-content">
-            <span id="closeBtn" class="close">&times;</span>
-            <p id="alert-frase">Informe sua senha:</p>
-            <input type="text" id="numericCode" placeholder="Código numérico" />
-            <button id="cancelBtn" class="cancel-btn">Cancelar</button>
-            <button id="confirmBtn">Confirmar</button>
-          </div>
-        </div>
-        <div class="container-principal">
+      <Alerta />
+      <div className="container-principal">
         <header>
-            <nav class="navigation">
-                <img class="seta" src="./img/arrow.png" alt="voltar" />
-                <a href="./admin.html">
-                    <h1 id="logo">FILA</h1>
-                </a>
-                <h1 id="rest">Restaurante</h1>
-            </nav>
+          <nav className="navigation">
+            <img className="seta" src="./img/arrow.png" alt="voltar" />
+            <a href="./admin.html">
+              <h1 id="logo">FILA</h1>
+            </a>
+            <h1 id="rest">Restaurante</h1>
+          </nav>
         </header>
-
-          <div class="container-prontos">
-            <p class="titulo-prontos">Prontos</p>
-            <div class="chamando">
-              <p>100</p>
-              <span>5 minutos atrás</span>
-            </div>
-            <div class="prontos-scroll">
-              <ul class="prontos">
-                {
-                  itens.map(cadaItem => {
-                    if(cadaItem.pronto){
-                      return <Pronto item={cadaItem} />
-                    }
-                  })
-                }
-              </ul>
-            </div>
+        <div className="container-prontos">
+          <p className="titulo-prontos">Prontos</p>
+          <div className="chamando">
+            <p>100</p>
+            <span>5 minutos atrás</span>
+          </div>
+          <div className="prontos-scroll">
+            <ul className="prontos">
+              {itens.map(cadaItem => (
+                cadaItem.pronto ? <Pronto key={cadaItem.id} item={cadaItem} /> : null
+              ))}
+            </ul>
           </div>
         </div>
-
-        <div class="container-proximos">
-          <p class="titulo-proximos">Proximos</p>
-          <ul class="proximo">
-            {
-              itens.map(cadaItem => {
-                if(cadaItem.pronto == false){
-                  return <Proximo item={cadaItem} />
-                }
-              })
-            }
+        <div className="container-proximos">
+          <p className="titulo-proximos">Proximos</p>
+          <ul className="proximo">
+            {itens.map(cadaItem => (
+              !cadaItem.pronto ? <Proximo key={cadaItem.id} item={cadaItem} /> : null
+            ))}
           </ul>
         </div>
-      </body>
+      </div>
       <script src="/script.js"></script>
     </div>
   );
 }
 
-export default App;
+export default UserPage;
