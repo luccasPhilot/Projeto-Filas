@@ -25,15 +25,29 @@ function AdminPage() {
       return 0; // Retorna 0 se houver um erro
     }
   }
+  async function getLastItem() {
+    try {
+      const response = await fetch('http://localhost:3000/fila/list');
+      const data = await response.json();
+      const ordemItem = data.reduce((max, item) => (item.ordem > max ? item.ordem : max), 0);
+      return ordemItem;
+    } catch (error) {
+      console.error("Erro ao obter a lista de itens:", error);
+      return 0; // Retorna 0 se houver um erro
+    }
+  }
 
   async function insertDocument(){
-    const lastCodigo = await getLastCodigo();
-    const newCodigo = lastCodigo + 100;
+  const lastCodigo = await getLastCodigo();
+  const lastItem = await getLastItem();
+    
+    const newItem = lastItem + 1;
+    const newCodigo = lastCodigo + 10;
     fetch('http://localhost:3000/fila/add',
       { 
         method:"POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"text": "", "active": true, "codigo": newCodigo})
+        body: JSON.stringify({"text": "", "active": true, "codigo": newCodigo, "ordem": newItem})
       }
     )
     .then(response => response.json())
