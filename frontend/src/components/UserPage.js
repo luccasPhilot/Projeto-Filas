@@ -6,7 +6,6 @@ import '../CSS/proximos.css';
 
 import Pronto from './prontos';
 import Proximo from './proximos';
-import Alerta from './alerta';
 
 function UserPage() {
   const [itens, setItens] = useState([]);
@@ -23,7 +22,6 @@ function UserPage() {
 
   return (
     <div className="App">
-      <Alerta />
       <div className="container-principal">
         <header>
           <nav className="navigation">
