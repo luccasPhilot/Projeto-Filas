@@ -14,12 +14,26 @@ function AdminPage() {
     .then(data => setItens(data))
   }
 
-  function insertDocument(){
+  async function getLastCodigo() {
+    try {
+      const response = await fetch('http://localhost:3000/fila/list');
+      const data = await response.json();
+      const maxCodigo = data.reduce((max, item) => (item.codigo > max ? item.codigo : max), 0);
+      return maxCodigo;
+    } catch (error) {
+      console.error("Erro ao obter a lista de itens:", error);
+      return 0; // Retorna 0 se houver um erro
+    }
+  }
+
+  async function insertDocument(){
+    const lastCodigo = await getLastCodigo();
+    const newCodigo = lastCodigo + 100;
     fetch('http://localhost:3000/fila/add',
       { 
         method:"POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"text": "", "active": true})
+        body: JSON.stringify({"text": "", "active": true, "codigo": newCodigo})
       }
     )
     .then(response => response.json())
