@@ -3,6 +3,7 @@ import '../CSS/alert.css';
 import '../CSS/styles.css';
 import '../CSS/prontos.css';
 import '../CSS/proximos.css';
+import Alert from './Alert';
 
 import Pronto from './prontos';
 import Proximo from './proximos';
@@ -16,12 +17,33 @@ function UserPage() {
       .then(data => setItens(data));
   }
 
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
+
   useEffect(() => {
-    getData();
+    getData()
+    setIsAlertOpen(true)
   }, []);
+
+  const handleCloseAlert = () => {
+    setIsAlertOpen(false);
+  }
+  const handleConfirmAlert = (number) => {
+    console.log('Number entered:', number);
+    setIsAlertOpen(false);
+  };
 
   return (
     <div className="App">
+      <div>
+      <h1>User Page</h1>
+      <Alert
+        isOpen={isAlertOpen}
+        onClose={handleCloseAlert}
+        onConfirm={handleConfirmAlert}
+        lista={itens}
+      />
+      </div>
+
       <div className="container-principal">
         <header>
           <nav className="navigation">

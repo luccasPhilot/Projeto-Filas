@@ -1,90 +1,71 @@
-body {
-  font-family: Arial, sans-serif;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding-top: 60px;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  font-size: 13px;
-  font-weight: 600;
-  margin: 5% auto;
+.custom-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
   padding: 20px;
-  width: 80%;
-  max-width: 300px;
   border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-#alert-frase {
-  color: rgb(54, 54, 54);
-  font-weight: 600;
-  margin-left: 10px;
-  margin-top: 10px;
+.custom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 
-.close {
-  color: #616161;
-  float: right;
-  font-size: 25px;
-  font-weight: 300;
+.custom-modal-header {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.close:hover,
-.close:focus {
-  color: #BE0E19;
-  text-decoration: none;
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
   cursor: pointer;
 }
 
-#numericCode {
-  width: 100%;
+.custom-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-number {
   padding: 10px;
-  margin: 10px 0;
-  border-radius: 50px;
-  box-sizing: border-box;
-  border: 1px solid #e0e0e0;
-  color: #000000;
-  font-weight: 600;
-  font-size: 12px;
+  margin-bottom: 20px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
 }
 
-#numericCode:focus::placeholder {
-  color: #BE0E19;
-  /* Cor do texto do placeholder ao focar */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-#numericCode:focus {
-  border-color: #BE0E19;
-  /* Cor da borda ao focar */
-}
-
-button {
+.cancel-button, .confirm-button {
   padding: 10px 20px;
-  margin: 5px;
-  font-size: 12px;
+  font-size: 1em;
   cursor: pointer;
-  border-radius: 50px;
-  border: 1px solid #B17A5B;
-  background-color: #B17A5B;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
-#cancelBtn {
-  background-color: white;
-  color: #B17A5B;
-  margin-left: 23px;
+.cancel-button {
+  background-color: #d9534f;
+  color: white;
+}
+
+.confirm-button {
+  background-color: #5cb85c;
+  color: white;
 }
