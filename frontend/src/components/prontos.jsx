@@ -1,7 +1,7 @@
-function Pronto({ item }) {
+function Pronto({ item, highlighted}) {
 
   return (
-    <li class="pedidos-prontos">
+    <li className={`pedidos-prontos ${highlighted ? 'highlighted' : ''}`}>
       <p>{item.text}</p>
     </li>
   )

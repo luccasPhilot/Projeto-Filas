@@ -27,21 +27,23 @@ function UserPage() {
   const handleCloseAlert = () => {
     setIsAlertOpen(false);
   }
+  
+  const [highlightedNumber, setHighlightedNumber] = useState(null);
   const handleConfirmAlert = (number) => {
-    console.log('Number entered:', number);
+    setHighlightedNumber(number);
     setIsAlertOpen(false);
   };
 
   return (
     <div className="App">
       <div>
-      <h1>User Page</h1>
-      <Alert
-        isOpen={isAlertOpen}
-        onClose={handleCloseAlert}
-        onConfirm={handleConfirmAlert}
-        lista={itens}
-      />
+        <h1>User Page</h1>
+        <Alert
+          isOpen={isAlertOpen}
+          onClose={handleCloseAlert}
+          onConfirm={handleConfirmAlert}
+          lista={itens}
+        />
       </div>
 
       <div className="container-principal">
@@ -63,7 +65,13 @@ function UserPage() {
           <div className="prontos-scroll">
             <ul className="prontos">
               {itens.map(cadaItem => (
-                (!cadaItem.active) ? <Pronto key={cadaItem.id} item={cadaItem} /> : null
+                (!cadaItem.active) ? (
+                  <Pronto
+                    key={cadaItem.id}
+                    item={cadaItem}
+                    highlighted={highlightedNumber === cadaItem.codigo}
+                  />
+                ) : null
               ))}
             </ul>
           </div>
@@ -72,7 +80,13 @@ function UserPage() {
           <p className="titulo-proximos">Proximos</p>
           <ul className="proximo">
             {itens.map(cadaItem => (
-              cadaItem.active ? <Proximo key={cadaItem.id} item={cadaItem} /> : null
+              cadaItem.active ? (
+                <Proximo
+                  key={cadaItem.id}
+                  item={cadaItem}
+                  highlighted={highlightedNumber === cadaItem.codigo}
+                />
+              ) : null
             ))}
           </ul>
         </div>

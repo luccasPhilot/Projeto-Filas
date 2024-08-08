@@ -10,10 +10,12 @@ const Alert = ({ isOpen, onClose, onConfirm, lista }) => {
 
   const handleConfirm = () => {
     const intNumber = parseInt(number, 10);
-    if (!isNaN(intNumber)) {
+    const foundItem = availableNumbers.find(item => item.codigo === intNumber);
+  
+    if (!isNaN(intNumber) && foundItem) {
       onConfirm(intNumber);
     } else {
-      alert("Please enter a valid number");
+      alert("Número não encontrado ou inválido. Por favor, insira um número válido.");
     }
   };
 

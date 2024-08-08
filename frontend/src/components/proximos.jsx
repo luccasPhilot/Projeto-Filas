@@ -1,14 +1,13 @@
-function Proximo({ item }) {
-
+function Proximo({ item, highlighted }) {
   return (
-    <li class="filas">
-      <div class="lugar">
+    <li className={`filas ${highlighted ? 'highlighted' : ''}`}>
+      <div className="lugar">
         <p>{item.ordem}º</p>
       </div>
       <p>{item.text} | {item.codigo}</p>
-      <img src="../public/img/Sino.png" alt="alerta" class="invert-on-hover" />
+      <img src="../public/img/Sino.png" alt="alerta" className="invert-on-hover" />
     </li>
-  )
+  );
 }
 
-export default Proximo
+export default Proximo;

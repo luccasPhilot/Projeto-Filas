@@ -62,3 +62,8 @@
 .prontos-scroll::-webkit-scrollbar {
     height: 0px; /* altura da barra de rolagem horizontal */
 }
+
+.highlighted {
+    background-color: rgb(113, 201, 113);
+    color: white;
+}
