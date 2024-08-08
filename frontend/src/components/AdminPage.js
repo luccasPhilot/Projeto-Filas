@@ -86,13 +86,9 @@ function AdminPage() {
 
   return (
     <div className="wrapper">
-      <div className="to-do-list">
+      <div className="container-proximos">
         <h1>To Do App</h1>
-        { 
-          itensToShow.map(item => {
-          return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} />
-          })
-        }
+
         <div className="filtro">
           <button 
           style={filterItens.filter ? {} : {fontWeight: "bold"}}
@@ -110,26 +106,18 @@ function AdminPage() {
              ? {fontWeight: "bold"} : {}}
           onClick={() => setFilterItens({filter: true, active: false})}
           >Concluídos</button>
-          
         </div>
+
+        <ul className = "proximo">
+          { 
+            itensToShow.map(item => {
+            return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} />
+            })
+          }
+        </ul>
+        
         <div className="novo">
           <button onClick={insertDocument}>Inserir Novo</button>
-        </div>
-
-        <div className="prontos-scroll">
-          <ul className="prontos">
-            {itens.map(cadaItem => (
-              cadaItem.pronto ? <Pronto key={cadaItem.id} item={cadaItem} /> : null
-            ))}
-          </ul>
-        </div>
-
-        <div className="container-proximos">
-          <ul className="proximo">
-            {itens.map(cadaItem => (
-              !cadaItem.pronto ? <Proximo key={cadaItem.id} item={cadaItem} /> : null
-            ))}
-          </ul>
         </div>
       </div>
     </div>

@@ -5,9 +5,12 @@ function Item({ item, updateDocument, deleteDocument }) {
   const [tempText, setTempText] = useState("")
 
   return (
-    <div className="row">
-
-      <input type="checkbox" checked={!item.active} onClick={() => { updateDocument({ ...item, active: !item.active }) }}/>
+    <li class="filas"
+      style={item.active ? {} : { backgroundColor: "#B17A5B" }}
+    >
+      <div class="lugar">
+        <p>{item.ordem}º</p>
+      </div>
       
       {((item.edit) || (item.text === "")) 
         ?
@@ -20,13 +23,15 @@ function Item({ item, updateDocument, deleteDocument }) {
         :
         <span 
           onClick={() => {updateDocument({ ...item, edit: true })}}
-          style={item.active ? {} : { textDecoration: "line-through"}}
         >{item.text}</span>
       }
       
-      <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
+      <p>{item.codigo}</p>
 
-    </div>
+      <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
+      
+      <input type="checkbox" checked={!item.active} onClick={() => { updateDocument({ ...item, active: !item.active }) }}/>
+    </li>
   )
 }
 

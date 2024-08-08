@@ -21,6 +21,7 @@ const Alert = ({ isOpen, onClose, onConfirm, lista }) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
+       
       className="custom-modal"
       overlayClassName="custom-overlay"
     >
