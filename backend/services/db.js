@@ -1,15 +1,15 @@
 require("dotenv").config();
 const { MongoClient } = require('mongodb');
 
-let singleton;
+let singleton
 
 async function connectToDB() {
-
     if (singleton) return singleton;
-
     const client = new MongoClient(process.env.MONGO_HOST);
+
     await client.connect();
     console.log('Connected successfully to MongoDB server');
+
     singleton = client.db(process.env.MONGO_DATABASE);
     return singleton;
 }
@@ -43,11 +43,20 @@ async function updateDocument(document) {
 }
 
 async function removeDocument(document) {
+    const db = await connectToDB();
+    const collection = db.collection('dados-fila');
+    const ordemRemovido = document.ordem
+  
     try {
-        const db = await connectToDB();
-        return db.collection('dados-fila').deleteOne({ _id: document._id })
+      await collection.deleteOne({ _id: document._id });
+
+      const result = collection.updateMany(
+        { ordem: { $gt: ordemRemovido } }, //gt = greater than (maior que)
+        { $inc: { ordem: -1 } } // incrementa
+      )
+      return result
     } catch (err) {
-        throw new Error(err);
+      throw new Error(`Erro ao remover documento e atualizar ordens: ${err.message}`);
     }
 }
 

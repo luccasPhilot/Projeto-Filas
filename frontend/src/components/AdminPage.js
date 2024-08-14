@@ -66,7 +66,7 @@ function AdminPage() {
     .then(() => getData())
   }
 
-  function deleteDocument(item){
+  async function deleteDocument(item){
     fetch('http://localhost:3000/fila/delete',
       { 
         method:"DELETE",
