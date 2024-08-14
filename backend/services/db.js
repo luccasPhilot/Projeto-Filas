@@ -38,14 +38,24 @@ async function updateDocument(document) {
     const ordemAntes = document.ordem
     
     try {
-        await collection.updateOne({ _id: document._id }, { $set: document })
-
-        const result = collection.updateMany(
-            { ordem: { $gt: ordemAntes} },
-            { $inc: { ordem: -1 } }
-        )
-
-        return result
+        if(ordemAntes !== 0) {
+            await collection.updateMany(
+                { ordem: { $gt: ordemAntes} },
+                { $inc: { ordem: -1 } },
+            )
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: { ...document, ordem: 0 }}
+            )
+        }
+        else {
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: document }
+            );
+        }
+    
+        return { success: true }
     } catch (err) {
         throw new Error(err)
     }
