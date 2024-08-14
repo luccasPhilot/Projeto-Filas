@@ -33,11 +33,21 @@ async function insertDocuments(document) {
 }
 
 async function updateDocument(document) {
+    const db = await connectToDB()
+    const collection = db.collection('dados-fila')
+    const ordemAntes = document.ordem
+    
     try {
-        const db = await connectToDB();
-        return db.collection('dados-fila').updateOne({ _id: document._id }, { $set: document });
+        await collection.updateOne({ _id: document._id }, { $set: document })
+
+        const result = collection.updateMany(
+            { ordem: { $gt: ordemAntes} },
+            { $inc: { ordem: -1 } }
+        )
+
+        return result
     } catch (err) {
-        throw new Error(err);
+        throw new Error(err)
     }
 
 }
@@ -54,9 +64,10 @@ async function removeDocument(document) {
         { ordem: { $gt: ordemRemovido } }, //gt = greater than (maior que)
         { $inc: { ordem: -1 } } // incrementa
       )
+      
       return result
     } catch (err) {
-      throw new Error(`Erro ao remover documento e atualizar ordens: ${err.message}`);
+        throw new Error(err)
     }
 }
 

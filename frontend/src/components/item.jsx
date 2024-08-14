@@ -30,7 +30,10 @@ function Item({ item, updateDocument, deleteDocument }) {
 
       <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
       
-      <input type="checkbox" checked={!item.active} onClick={() => { updateDocument({ ...item, active: !item.active }) }}/>
+      <button className="chamar" onClick={() => {
+        updateDocument({ ...item, active: !item.active })
+      }}
+      >Chamar</button>
     </li>
   )
 }
