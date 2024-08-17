@@ -59,9 +59,9 @@ function UserPage() {
         </header>
         <div className="container-prontos">
           <p className="titulo-prontos">Prontos</p>
-          <div className="chamando">
+          <div>
             {itens.map(cadaItem => (
-              (!cadaItem.active && cadaItem.ordem == 0) ? (
+              (!cadaItem.active && cadaItem.ordem === 0) ? (
                 <Chamando
                   key={cadaItem.id}
                   item={cadaItem}
@@ -73,7 +73,7 @@ function UserPage() {
           <div className="prontos-scroll">
             <ul className="prontos">
               {itens.map(cadaItem => (
-                (!cadaItem.active && cadaItem.ordem != 0) ? (
+                (!cadaItem.active && cadaItem.ordem !== 0) ? (
                   <Pronto
                     key={cadaItem.id}
                     item={cadaItem}
