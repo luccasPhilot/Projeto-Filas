@@ -31,6 +31,10 @@ router.patch("/update", checkBody, async (req, res) => { //dar um update na base
     const results = await db.updateDocument(req.body)
     res.send(results)
 });
+router.patch("/updatefila", checkBody, async (req, res) => { //dar um update na base
+    const results = await db.updateFila(req.body)
+    res.send(results)
+});
 
 router.delete("/delete", checkBody, async (req, res) => { //apagar item da base
     const results = await db.removeDocument(req.body)

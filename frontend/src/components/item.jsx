@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-function Item({ item, updateDocument, deleteDocument }) {
+function Item({ item, updateDocument, deleteDocument, updateFila }) {
 
   const [tempText, setTempText] = useState("")
 
@@ -30,8 +30,7 @@ function Item({ item, updateDocument, deleteDocument }) {
 
       <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
       
-      <button className="chamar" onClick={() => {
-        updateDocument({ ...item, active: !item.active })
+      <button className="chamar" onClick={() => {updateFila({ ...item, active: !item.active })
       }}
       >Chamar</button>
     </li>

@@ -65,6 +65,17 @@ function AdminPage() {
     .then(response => response.json())
     .then(() => getData())
   }
+  function updateFila(item){
+    fetch('http://localhost:3000/fila/updatefila',
+      { 
+        method:"PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+      }
+    )
+    .then(response => response.json())
+    .then(() => getData())
+  }
 
   async function deleteDocument(item){
     fetch('http://localhost:3000/fila/delete',
@@ -107,11 +118,12 @@ function AdminPage() {
           onClick={() => setFilterItens({filter: true, active: false})}
           >Concluídos</button>
         </div>
+        
 
         <ul className = "proximo">
           { 
             itensToShow.map(item => {
-            return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} />
+            return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila}/>
             })
           }
         </ul>

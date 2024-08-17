@@ -34,11 +34,26 @@ async function insertDocuments(document) {
 
 async function updateDocument(document) {
     const db = await connectToDB()
+    return db.collection("dados-fila").updateOne({ _id: document._id }, { $set: document });
+  }
+
+async function updateFila(document) {
+    const db = await connectToDB()
     const collection = db.collection('dados-fila')
     const ordemAntes = document.ordem
     
     try {
         if(ordemAntes !== 0) {
+            await collection.updateMany(
+                { ordem: { $gt: ordemAntes} },
+                { $inc: { ordem: -1 } },
+            )
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: { ...document, ordem: 0 }}
+            )
+        }
+        else if(ordemAntes === 0) {
             await collection.updateMany(
                 { ordem: { $gt: ordemAntes} },
                 { $inc: { ordem: -1 } },
@@ -87,4 +102,5 @@ module.exports = {
     insertDocuments,
     updateDocument,
     removeDocument,
+    updateFila
 };
