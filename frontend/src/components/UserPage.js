@@ -3,10 +3,11 @@ import '../CSS/alert.css';
 import '../CSS/styles.css';
 import '../CSS/prontos.css';
 import '../CSS/proximos.css';
-import Alert from './Alert';
 
+import Alert from './Alert';
 import Pronto from './prontos';
 import Proximo from './proximos';
+import Chamando from './Chamando';
 
 function UserPage() {
   const [itens, setItens] = useState([]);
@@ -27,7 +28,7 @@ function UserPage() {
   const handleCloseAlert = () => {
     setIsAlertOpen(false);
   }
-  
+
   const [highlightedNumber, setHighlightedNumber] = useState(null);
   const handleConfirmAlert = (number) => {
     setHighlightedNumber(number);
@@ -59,13 +60,20 @@ function UserPage() {
         <div className="container-prontos">
           <p className="titulo-prontos">Prontos</p>
           <div className="chamando">
-            <p>100</p>
-            <span>5 minutos atrás</span>
+            {itens.map(cadaItem => (
+              (!cadaItem.active && cadaItem.ordem == 0) ? (
+                <Chamando
+                  key={cadaItem.id}
+                  item={cadaItem}
+                  highlighted={highlightedNumber === cadaItem.codigo}
+                />
+              ) : null
+            ))}
           </div>
           <div className="prontos-scroll">
             <ul className="prontos">
               {itens.map(cadaItem => (
-                (!cadaItem.active) ? (
+                (!cadaItem.active && cadaItem.ordem != 0) ? (
                   <Pronto
                     key={cadaItem.id}
                     item={cadaItem}

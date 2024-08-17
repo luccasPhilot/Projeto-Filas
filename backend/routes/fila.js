@@ -31,8 +31,12 @@ router.patch("/update", checkBody, async (req, res) => { //dar um update na base
     const results = await db.updateDocument(req.body)
     res.send(results)
 });
-router.patch("/updatefila", checkBody, async (req, res) => { //dar um update na base
+router.patch("/updatefila", checkBody, async (req, res) => {
     const results = await db.updateFila(req.body)
+    res.send(results)
+});
+router.patch("/voltar", checkBody, async (req, res) => { 
+    const results = await db.updateVoltar(req.body)
     res.send(results)
 });
 

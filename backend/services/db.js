@@ -35,7 +35,28 @@ async function insertDocuments(document) {
 async function updateDocument(document) {
     const db = await connectToDB()
     return db.collection("dados-fila").updateOne({ _id: document._id }, { $set: document });
-  }
+}
+
+async function updateVoltar(document) {
+    const db = await connectToDB()
+    const collection = db.collection('dados-fila')
+    const ordemAntes = document.ordem
+
+    try {
+            await collection.updateMany(
+                { ordem: { $gt: 0} },
+                { $inc: { ordem: +1 } },
+            )
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: { ...document, ordem: 1 }}
+            )
+    
+        return { success: true }
+    } catch (err) {
+        throw new Error(err)
+    }
+}
 
 async function updateFila(document) {
     const db = await connectToDB()
@@ -43,9 +64,11 @@ async function updateFila(document) {
     const ordemAntes = document.ordem
     
     try {
-        if(ordemAntes !== 0) {
+        if((ordemAntes!== 0) && (ordemAntes!== -1)) {
             await collection.updateMany(
                 { ordem: { $gt: ordemAntes} },
+                { $inc: { ordem: -1 } },
+                { ordem: { $lt: (ordemAntes+1)} },
                 { $inc: { ordem: -1 } },
             )
             await collection.updateOne(
@@ -55,7 +78,17 @@ async function updateFila(document) {
         }
         else if(ordemAntes === 0) {
             await collection.updateMany(
-                { ordem: { $gt: ordemAntes} },
+                { ordem: 0 },
+                { $inc: { ordem: -1 } },
+            )
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: { ...document, ordem: 0 }}
+            )
+        }
+        else if(ordemAntes === -1) {
+            await collection.updateMany(
+                { ordem: 0 },
                 { $inc: { ordem: -1 } },
             )
             await collection.updateOne(
@@ -102,5 +135,6 @@ module.exports = {
     insertDocuments,
     updateDocument,
     removeDocument,
-    updateFila
+    updateFila,
+    updateVoltar
 };

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Item from './item'
-import Pronto from './prontos'
-import Proximo from './proximos'
+import Pronto from './prontosadm'
 
 function AdminPage() {
 
@@ -76,6 +75,17 @@ function AdminPage() {
     .then(response => response.json())
     .then(() => getData())
   }
+  function updateVoltar(item){
+    fetch('http://localhost:3000/fila/voltar',
+      { 
+        method:"PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item)
+      }
+    )
+    .then(response => response.json())
+    .then(() => getData())
+  }
 
   async function deleteDocument(item){
     fetch('http://localhost:3000/fila/delete',
@@ -119,11 +129,20 @@ function AdminPage() {
           >Concluídos</button>
         </div>
         
+        <ul className = "pronto">
+          { 
+            itensToShow.map(item => {
+            return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
+            })
+          }
+        </ul>
 
         <ul className = "proximo">
           { 
             itensToShow.map(item => {
-            return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila}/>
+              if (item.active){
+                return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila}/>
+              }
             })
           }
         </ul>
