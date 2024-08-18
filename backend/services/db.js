@@ -17,7 +17,7 @@ async function connectToDB() {
 async function findDocuments() {
     try {
         const db = await connectToDB();
-        return db.collection("dados-fila").find().toArray();
+        return db.collection("dados-fila").find().sort({ ordem: 1 }).toArray();
     } catch (err) {
         throw new Error(err);
     }
@@ -68,33 +68,28 @@ async function updateFila(document) {
             await collection.updateMany(
                 { ordem: { $gt: ordemAntes} },
                 { $inc: { ordem: -1 } },
-                { ordem: { $lt: (ordemAntes+1)} },
-                { $inc: { ordem: -1 } },
-            )
+            );
+            await collection.updateMany(
+                { ordem: -1 },
+                { $set: { ordem: 0 } },
+            );
             await collection.updateOne(
                 { _id: document._id },
-                { $set: { ...document, ordem: 0 }}
-            )
+                { $set: { ...document, ordem: -1 }}
+            );
         }
         else if(ordemAntes === 0) {
             await collection.updateMany(
-                { ordem: 0 },
-                { $inc: { ordem: -1 } },
+                { ordem: -1 },
+                { $inc: { ordem: +1 } },
             )
             await collection.updateOne(
                 { _id: document._id },
-                { $set: { ...document, ordem: 0 }}
+                { $set: { ...document, ordem: -1 }}
             )
         }
         else if(ordemAntes === -1) {
-            await collection.updateMany(
-                { ordem: 0 },
-                { $inc: { ordem: -1 } },
-            )
-            await collection.updateOne(
-                { _id: document._id },
-                { $set: { ...document, ordem: 0 }}
-            )
+            
         }
         else {
             await collection.updateOne(
@@ -117,13 +112,13 @@ async function removeDocument(document) {
   
     try {
       await collection.deleteOne({ _id: document._id });
-
-      const result = collection.updateMany(
-        { ordem: { $gt: ordemRemovido } }, //gt = greater than (maior que)
-        { $inc: { ordem: -1 } } // incrementa
-      )
-      
-      return result
+      if (ordemRemovido > 0) {
+        await collection.updateMany(
+            { ordem: { $gt: ordemRemovido } }, //gt = greater than (maior que)
+            { $inc: { ordem: -1 } } // incrementa
+        )
+      }
+      return { success: true }
     } catch (err) {
         throw new Error(err)
     }
