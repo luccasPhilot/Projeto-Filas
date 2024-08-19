@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Item from './item'
 import Pronto from './prontosadm'
 
 function AdminPage() {
@@ -128,11 +127,27 @@ function AdminPage() {
           onClick={() => setFilterItens({filter: true, active: false})}
           >Concluídos</button>
         </div>
-        
+
+        <ul className = "chamandoo">
+          { 
+            itensToShow.map(item => 
+              { 
+                if (item.ordem === -1) {
+                  return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
+                }
+                return null
+              }
+            )
+          }
+        </ul>
+
         <ul className = "pronto">
           { 
             itensToShow.map(item => {
-            return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
+              if (item.ordem === 0) {
+                return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
+              }
+              return null
             })
           }
         </ul>
@@ -140,9 +155,10 @@ function AdminPage() {
         <ul className = "proximo">
           { 
             itensToShow.map(item => {
-              if (item.active){
-                return <Item item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila}/>
+              if ((item.ordem!==0) && (item.ordem!==-1)) {
+                return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
               }
+              return null
             })
           }
         </ul>

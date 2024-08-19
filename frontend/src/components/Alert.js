@@ -31,6 +31,7 @@ const Alert = ({ isOpen, onClose, onConfirm, lista }) => {
         <button onClick={onClose} className="close-button">X</button>
       </div>
       <div className="custom-modal-body">
+        <h2>Qual o seu numero?</h2>
         <input
           type="number"
           value={number}

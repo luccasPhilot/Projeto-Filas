@@ -15,6 +15,7 @@ function Item({ item, updateDocument, deleteDocument, updateFila }) {
       {((item.edit) || (item.text === "")) 
         ?
         <input 
+          className="filas-content"
           type="text" 
           placeholder={item.text} 
           onChange={(e) => {setTempText(e.target.value)}}
@@ -22,17 +23,20 @@ function Item({ item, updateDocument, deleteDocument, updateFila }) {
         />
         :
         <span 
+          className="filas-content"
           onClick={() => {updateDocument({ ...item, edit: true })}}
         >{item.text}</span>
       }
       
       <p>{item.codigo}</p>
 
-      <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
-      
-      <button className="chamar" onClick={() => {updateFila({ ...item, active: !item.active })
-      }}
-      >Chamar</button>
+      <div className="buttons">
+        <button className="del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
+        
+        <button className="chamar" onClick={() => {updateFila({ ...item, active: !item.active })
+        }}
+        >Chamar</button>
+      </div>
     </li>
   )
 }

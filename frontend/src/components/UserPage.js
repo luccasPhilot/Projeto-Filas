@@ -61,9 +61,8 @@ function UserPage() {
           <p className="titulo-prontos">Prontos</p>
           <div>
             {itens.map(cadaItem => (
-              (!cadaItem.active && cadaItem.ordem === 0) ? (
+              (!cadaItem.active && cadaItem.ordem === -1) ? (
                 <Chamando
-                  key={cadaItem.id}
                   item={cadaItem}
                   highlighted={highlightedNumber === cadaItem.codigo}
                 />
@@ -73,9 +72,8 @@ function UserPage() {
           <div className="prontos-scroll">
             <ul className="prontos">
               {itens.map(cadaItem => (
-                (!cadaItem.active && cadaItem.ordem !== 0) ? (
+                (!cadaItem.active && cadaItem.ordem === 0) ? (
                   <Pronto
-                    key={cadaItem.id}
                     item={cadaItem}
                     highlighted={highlightedNumber === cadaItem.codigo}
                   />
@@ -90,7 +88,6 @@ function UserPage() {
             {itens.map(cadaItem => (
               cadaItem.active ? (
                 <Proximo
-                  key={cadaItem.id}
                   item={cadaItem}
                   highlighted={highlightedNumber === cadaItem.codigo}
                 />
