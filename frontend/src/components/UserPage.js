@@ -38,7 +38,7 @@ function UserPage() {
   return (
     <div className="App">
       <div>
-        <h1>User Page</h1>
+        <h1>User Pagee</h1>
         <Alert
           isOpen={isAlertOpen}
           onClose={handleCloseAlert}
@@ -46,7 +46,7 @@ function UserPage() {
           lista={itens}
         />
       </div>
-
+    
       <div className="container-principal">
         <header>
           <nav className="navigation">
