@@ -112,19 +112,17 @@ function AdminPage() {
         <div className="filtro">
           <button 
           style={filterItens.filter ? {} : {fontWeight: "bold"}}
-          onClick={() => setFilterItens({filter: false})}
-          >Todos</button>
+          onClick={() => setFilterItens({filter: false})}>Todos</button>
 
           <button 
-          style={((filterItens.filter) && (filterItens.active))
-            ? {fontWeight: "bold"} : {}}
-          onClick={() => setFilterItens({filter: true, active: true})}
+          style={((filterItens.filter) && (filterItens.active)) ? {} : {fontWeight: "bold"}}
+          onClick={() => setFilterItens({filter: true, active: false})}
           >Pendentes</button>
 
           <button 
           style={((filterItens.filter) &&  (!filterItens.active))
-             ? {fontWeight: "bold"} : {}}
-          onClick={() => setFilterItens({filter: true, active: false})}
+             ? {} : {fontWeight: "bold"}}
+          onClick={() => setFilterItens({filter: true, active: true})}
           >Concluídos</button>
         </div>
 
