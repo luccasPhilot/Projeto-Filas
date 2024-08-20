@@ -5,24 +5,24 @@
 }
 
 .filas {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
-    border-radius: 10px;
+    border-radius: 30px;
     margin: 10px auto 0;
     margin-bottom: 20px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #cdcdcd;
+    position: relative;
 }
 .filas-content {
     flex-grow: 1;
     padding: 20px;
     margin: 0;
-    font-size: 16px;
     border: none; /* Remove bordas */
     outline: none; /* Remove o contorno de foco */
     background: transparent; /* Remove o fundo */
@@ -30,9 +30,16 @@
     width: 50%; /* Garante que eles ocupem o mesmo espaço */
     box-sizing: border-box; /* Inclui padding e borda na largura total */
 }
-.filas-codigo {
-    margin: 20px;
+.senha {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
+.code {
+    margin-right: 10px;
+}
+
 .buttons {
     display: flex;
     justify-content: flex-end;
@@ -54,10 +61,11 @@
     color: #fff;
     align-items: center;
     justify-content: center;
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
     background-color: #BE0E19;
-    border-radius: 5px;
+    border-radius: 30px;
+    font-weight: 900px;
 }
 
 .titulo-proximos {
@@ -67,13 +75,6 @@
     margin-bottom: 10px;
 }
 
-.invert-on-hover {
-    width: 20px;
-    height: 20px;
-    opacity: 30%;
-    cursor: pointer;
-    transition: filter 0.5s ease; /* Adiciona uma transição suave */
-}
 
 .invert-on-hover:hover {
     opacity: 100%;

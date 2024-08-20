@@ -19,7 +19,6 @@ function Item({ item, updateDocument, deleteDocument, updateFila, updateVoltar }
           className="filas-content"
           value={tempText}
           type="text" 
-          placeholder={item.text} 
           onChange={(e) => {setTempText(e.target.value)}}
           onBlur={
             () => {updateDocument({...item, text: tempText, edit: false})

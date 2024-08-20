@@ -2,10 +2,18 @@ function Proximo({ item, highlighted }) {
   return (
     <li className={`filas ${highlighted ? 'highlighted' : ''}`}>
       <div className="lugar">
-        <p>{item.ordem}º</p>
+        <p>{(item.ordem)+1}º</p>
       </div>
-      <p>{item.text} | {item.codigo}</p>
-      <img src="../public/img/Sino.png" alt="alerta" className="invert-on-hover" />
+      <p className="senha">
+        {
+          item.codigo
+        }
+      </p>
+      <p className="code">
+        {
+          item.text ? item.text : ""
+        }
+      </p>
     </li>
   );
 }

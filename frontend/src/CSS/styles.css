@@ -24,24 +24,30 @@ header h1 {
     font-weight: 600;
 }
 
-.seta{
-    width: 20px;
-    height: 20px;
-}
 .navigation {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* Distribui o espaço entre os itens */
+    align-items: center; /* Alinha itens verticalmente */
     padding: 18px 40px;
     width: 100%;
     transition: all 0.5s;
 }
-#logo {
-    margin-right: 140px;
+.left-group {
+    display: flex; /* Organiza os itens na extrema esquerda */
+    align-items: center; /* Alinha itens verticalmente */
 }
-#rest {
+.seta {
+    width: 20px;
+    height: 20px;
+}
+.logo {
+    margin-left: 10px; /* Espaçamento opcional entre seta e logo */
+}
+.rest {
     font-weight: 300;
+    /* Alinhamento à direita é garantido pelo espaço entre grupos */
 }
+
 
 
 /* Estilos padrão para dispositivos móveis

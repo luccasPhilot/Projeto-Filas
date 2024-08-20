@@ -1,8 +1,10 @@
 .container-prontos {
     width: 90%; 
-    margin: 0px auto 0px;
-    padding: 5px 20px 20px 20px;
-    height: 370px;
+    margin: 0 auto; /* Remove o margin-bottom e margin-top especificados */
+    padding: 5px 20px; /* Remove o padding-bottom se não for necessário */
+    height: auto; /* Ajusta a altura automaticamente para o conteúdo */
+    box-sizing: border-box; /* Inclui padding e border na altura e largura total */
+    overflow: hidden;
 }
 
 .prontos-scroll {
@@ -22,13 +24,39 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 80px;
+    font-size: 60px;
     background-color: #BE0E19;
-    height: 200px;
-    border-radius: 5px;
+    height: 240px;
+    border-radius: 30px;
     margin-bottom: 20px;
+    margin-top: 15px;
     position: relative; 
+    padding-top: 17px;
+    
 }
+.pos {
+    position: absolute;
+    top: 12px; /* Ajuste a distância do topo */
+    left: 20px; /* Ajuste a distância da esquerda */
+    font-size: 30px; /* Ajuste o tamanho do número conforme necessário */
+    color: #fff; /* Cor do número */
+}
+.name {
+    position: absolute;
+    top: 197px; /* Ajuste a distância do topo conforme necessário */
+    right: 20px; /* Ajuste a distância da direita conforme necessário */
+    font-size: 25px;
+    color: #fff;
+}
+.chamando p {
+    position: absolute;
+    top: 25px; /* Ajuste conforme necessário */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta para centralizar o texto */
+    padding: 5px; /* Espaçamento interno */
+    z-index: 10; /* Garante que o <p> fique acima do <h1> */
+    font-size: 28px
+  }
 
 .chamando span {
     font-size: 14px;

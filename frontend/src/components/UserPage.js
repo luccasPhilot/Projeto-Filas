@@ -38,7 +38,6 @@ function UserPage() {
   return (
     <div className="App">
       <div>
-        <h1>User Pagee</h1>
         <Alert
           isOpen={isAlertOpen}
           onClose={handleCloseAlert}
@@ -50,15 +49,17 @@ function UserPage() {
       <div className="container-principal">
         <header>
           <nav className="navigation">
-            <img className="seta" src="./img/arrow.png" alt="voltar" />
-            <a href="./admin.html">
-              <h1 id="logo">FILA</h1>
-            </a>
-            <h1 id="rest">Restaurante</h1>
+            <div class="left-group">
+              <img className="seta" src="./img/arrow.png" alt="voltar" />
+
+              <a href="./admin.html">
+                <h1 className="logo">FILA</h1>
+              </a>
+            </div>
+            <h1 className="rest">Restaurante</h1>
           </nav>
         </header>
         <div className="container-prontos">
-          <p className="titulo-prontos">Prontos</p>
           <div>
             {itens.map(cadaItem => (
               (cadaItem.ordem === -1) ? (
@@ -69,6 +70,7 @@ function UserPage() {
               ) : null
             ))}
           </div>
+          {/*
           <div className="prontos-scroll">
             <ul className="prontos">
               {itens.map(cadaItem => (
@@ -81,13 +83,13 @@ function UserPage() {
               ))}
             </ul>
           </div>
+          */}
         </div>
         <div className="container-proximos">
-          <p className="titulo-proximos">Proximos</p>
           <ul className="proximo">
             {itens.map(cadaItem => (
-              cadaItem.active && cadaItem.ordem != 0 && cadaItem.ordem != -1 ? (
-                <Proximo
+              cadaItem.ordem != 0 && cadaItem.ordem != -1 ? (
+                <Proximo 
                   item={cadaItem}
                   highlighted={highlightedNumber === cadaItem.codigo}
                 />
