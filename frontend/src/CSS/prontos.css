@@ -24,15 +24,14 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 60px;
+    font-size: 45px;
     background-color: #BE0E19;
-    height: 240px;
+    height: 220px;
     border-radius: 30px;
     margin-bottom: 20px;
     margin-top: 15px;
     position: relative; 
-    padding-top: 17px;
-    
+    padding-top: 8px;
 }
 .pos {
     position: absolute;
@@ -41,21 +40,25 @@
     font-size: 30px; /* Ajuste o tamanho do número conforme necessário */
     color: #fff; /* Cor do número */
 }
-.name {
-    position: absolute;
-    top: 197px; /* Ajuste a distância do topo conforme necessário */
-    right: 20px; /* Ajuste a distância da direita conforme necessário */
-    font-size: 25px;
-    color: #fff;
-}
 .chamando p {
     position: absolute;
-    top: 25px; /* Ajuste conforme necessário */
+    top: 20px; /* Ajuste conforme necessário */
     left: 50%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Ajusta para centralizar o texto */
     padding: 5px; /* Espaçamento interno */
     z-index: 10; /* Garante que o <p> fique acima do <h1> */
-    font-size: 28px
+    font-size: 25px
+
+}
+.name {
+    position: absolute;
+    top: 170px; /* Posiciona logo abaixo do <h1> */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta para centralizar o texto */
+    padding: 5px; /* Espaçamento interno */
+    font-size: 22px; /* Ajuste o tamanho da fonte conforme necessário */
+    white-space: nowrap; /* Impede que o texto se quebre em várias linhas */
+    z-index: 5; /* Garante que o <div> fique abaixo do <p> */
 }
 
 .naoveio {
