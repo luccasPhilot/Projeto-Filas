@@ -70,6 +70,11 @@ function UserPage() {
               ) : null
             ))}
           </div>
+          <div className='naoveio'>
+            <p>
+              Ver já chamados
+            </p>
+          </div>
           {/*
           <div className="prontos-scroll">
             <ul className="prontos">

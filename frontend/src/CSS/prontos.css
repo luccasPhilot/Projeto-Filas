@@ -56,7 +56,14 @@
     padding: 5px; /* Espaçamento interno */
     z-index: 10; /* Garante que o <p> fique acima do <h1> */
     font-size: 28px
-  }
+}
+
+.naoveio {
+    display: flex;
+    justify-content: flex-end; /* Alinha os itens à direita */
+    width: 100%;
+    color: #909090;
+}
 
 .chamando span {
     font-size: 14px;
