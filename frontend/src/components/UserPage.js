@@ -51,10 +51,7 @@ function UserPage() {
           <nav className="navigation">
             <div class="left-group">
               <img className="seta" src="./img/arrow.png" alt="voltar" />
-
-              <a href="./admin.html">
-                <h1 className="logo">FILA</h1>
-              </a>
+              <h1 className="logo">FILA</h1>
             </div>
             <h1 className="rest">Restaurante</h1>
           </nav>

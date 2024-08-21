@@ -46,7 +46,6 @@
     left: 50%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Ajusta para centralizar o texto */
     padding: 5px; /* Espaçamento interno */
-    z-index: 10; /* Garante que o <p> fique acima do <h1> */
     font-size: 25px
 
 }
@@ -58,7 +57,6 @@
     padding: 5px; /* Espaçamento interno */
     font-size: 22px; /* Ajuste o tamanho da fonte conforme necessário */
     white-space: nowrap; /* Impede que o texto se quebre em várias linhas */
-    z-index: 5; /* Garante que o <div> fique abaixo do <p> */
 }
 
 .naoveio {
