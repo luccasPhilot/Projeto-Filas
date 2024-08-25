@@ -2,6 +2,7 @@ import {useState} from "react"
 
 function Item({ item, updateDocument, deleteDocument, updateFila, updateVoltar }) {
   const [tempText, setTempText] = useState(item.text)
+  const [tempCod, setTempCod] = useState(item.codigo)
 
   return (
     <li className="filas"
@@ -32,10 +33,25 @@ function Item({ item, updateDocument, deleteDocument, updateFila, updateVoltar }
         >{item.text}</span>
       }
       
-      <p
-        className="filas-codigo"
-      >{item.codigo}</p>
-
+      {((item.editcod) || (item.codigo === "")) 
+        ?
+        <input 
+          className="filas-codigo"
+          value={tempCod}
+          type="text" 
+          onChange={(e) => {setTempCod(e.target.value)}}
+          onBlur={
+            () => {updateDocument({...item, codigo: tempCod, editcod: false})
+            setTempCod(tempCod)
+          }}
+        />
+        :
+        <span 
+          className="filas-codigo"
+          onClick={() => {updateDocument({ ...item, editcod: true })}}
+        >{item.codigo}</span>
+      }
+ 
       <div className="buttons">
         {(item.ordem === 0 || item.ordem === -1) && (
           <button className="btn voltar"

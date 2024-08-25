@@ -12,7 +12,7 @@ function AdminPage() {
     .then(data => setItens(data))
   }
 
-  async function getLastCodigo() {
+  /*async function getLastCodigo() {
     try {
       const response = await fetch('http://localhost:3000/fila/list');
       const data = await response.json();
@@ -22,7 +22,7 @@ function AdminPage() {
       console.error("Erro ao obter a lista de itens:", error);
       return 0; // Retorna 0 se houver um erro
     }
-  }
+  }*/
   async function getLastItem() {
     try {
       const response = await fetch('http://localhost:3000/fila/list');
@@ -36,22 +36,37 @@ function AdminPage() {
   }
 
   async function insertDocument(){
-  const lastCodigo = await getLastCodigo();
+  //const lastCodigo = await getLastCodigo();
   const lastItem = await getLastItem();
     
     const newItem = lastItem + 1;
-    const newCodigo = lastCodigo + 10;
+    //const newCodigo = lastCodigo + 10;
     fetch('http://localhost:3000/fila/add',
       { 
         method:"POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"text": "", "active": true, "codigo": newCodigo, "ordem": newItem})
+        body: JSON.stringify({"text": "", "active": true, "codigo": (newItem*100), "ordem": newItem})
       }
     )
     .then(response => response.json())
     .then(() => getData())
   }
 
+  /*async function insertDocument(){
+    const lastItem = await getLastItem();
+      
+      const newItem = lastItem + 1;
+      fetch('http://localhost:3000/fila/add',
+        { 
+          method:"POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({"text": "", "active": true, "codigo": "", "ordem": newItem})
+        }
+      )
+      .then(response => response.json())
+      .then(() => getData())
+  }
+  */
   function updateDocument(item){
     fetch('http://localhost:3000/fila/update',
       { 

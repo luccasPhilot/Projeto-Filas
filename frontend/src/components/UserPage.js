@@ -5,13 +5,12 @@ import '../CSS/prontos.css';
 import '../CSS/proximos.css';
 
 import Alert from './Alert';
-import Pronto from './prontos';
+//import Pronto from './prontos';
 import Proximo from './proximos';
 import Chamando from './Chamando';
 
 function UserPage() {
   const [itens, setItens] = useState([]);
-
   function getData() {
     fetch('http://localhost:3000/fila/list', { method: 'GET' })
       .then(response => response.json())
@@ -29,9 +28,11 @@ function UserPage() {
     setIsAlertOpen(false);
   }
 
-  const [highlightedNumber, setHighlightedNumber] = useState(null);
-  const handleConfirmAlert = (number) => {
-    setHighlightedNumber(number);
+  const [highlightedSenha, setHighlightedSenha] = useState(null);
+
+  const handleConfirmAlert = (foundItem) => {
+    setHighlightedSenha(foundItem.codigo); 
+    
     setIsAlertOpen(false);
   };
 
@@ -62,7 +63,7 @@ function UserPage() {
               (cadaItem.ordem === -1) ? (
                 <Chamando
                   item={cadaItem}
-                  highlighted={highlightedNumber === cadaItem.codigo}
+                  highlighted={Number(highlightedSenha) === Number(cadaItem.codigo)}
                 />
               ) : null
             ))}
@@ -90,10 +91,11 @@ function UserPage() {
         <div className="container-proximos">
           <ul className="proximo">
             {itens.map(cadaItem => (
-              cadaItem.ordem != 0 && cadaItem.ordem != -1 ? (
+              cadaItem.ordem !== 0 && cadaItem.ordem !== -1 ? (
                 <Proximo 
                   item={cadaItem}
-                  highlighted={highlightedNumber === cadaItem.codigo}
+                  highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                  log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
                 />
               ) : null
             ))}
