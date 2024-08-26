@@ -5,7 +5,7 @@ import '../CSS/prontos.css';
 import '../CSS/proximos.css';
 
 import Alert from './Alert';
-//import Pronto from './prontos';
+import Pronto from './prontos';
 import Proximo from './proximos';
 import Chamando from './Chamando';
 
@@ -31,9 +31,14 @@ function UserPage() {
   const [highlightedSenha, setHighlightedSenha] = useState(null);
 
   const handleConfirmAlert = (foundItem) => {
-    setHighlightedSenha(foundItem.codigo); 
-    
+    setHighlightedSenha(foundItem.codigo);
+
     setIsAlertOpen(false);
+  };
+
+  const [mostrandoProntos, setMostrandoProntos] = useState(false);
+  function VerChamados() {
+    setMostrandoProntos(!mostrandoProntos);
   };
 
   return (
@@ -46,7 +51,7 @@ function UserPage() {
           lista={itens}
         />
       </div>
-    
+
       <div className="container-principal">
         <header>
           <nav className="navigation">
@@ -68,31 +73,50 @@ function UserPage() {
               ) : null
             ))}
           </div>
+
           <div className='naoveio'>
-            <p>
-              Ver já chamados
-            </p>
+            <div className="prontos-scroll">
+              {mostrandoProntos && (
+                <ul className="prontos">
+                  {itens.map(cadaItem => (
+                    (cadaItem.ordem === 0 && cadaItem.codigo) ? (
+                      <li key={cadaItem.codigo}>
+                        <Pronto
+                          item={cadaItem}
+                          highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                        />
+                      </li>
+                    ) : null
+                  ))}
+                </ul>
+
+              )}
+              <button onClick={VerChamados}>
+                Ver já chamados
+              </button>
+            </div>
           </div>
+
           {/*
-          <div className="prontos-scroll">
-            <ul className="prontos">
-              {itens.map(cadaItem => (
-                (cadaItem.ordem === 0) ? (
-                  <Pronto
-                    item={cadaItem}
-                    highlighted={highlightedNumber === cadaItem.codigo}
-                  />
-                ) : null
-              ))}
-            </ul>
-          </div>
+            <div className="prontos-scroll">
+              <ul className="prontos">
+                {itens.map(cadaItem => (
+                  (cadaItem.ordem === 0) ? (
+                    <Pronto
+                      highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                      log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
+                    />
+                  ) : null
+                ))}
+              </ul>
+            </div>
           */}
         </div>
         <div className="container-proximos">
           <ul className="proximo">
             {itens.map(cadaItem => (
               cadaItem.ordem !== 0 && cadaItem.ordem !== -1 ? (
-                <Proximo 
+                <Proximo
                   item={cadaItem}
                   highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
                   log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
