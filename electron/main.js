@@ -1,8 +1,9 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
-
 const screenshot = require('screenshot-desktop');
 const Jimp = require('jimp'); // for crop
 const path = require('path');
+const express = require('express');
+const cors = require('cors');
 
 const vision = require('@google-cloud/vision');
 const { API_KEY } = require('./config');
@@ -59,6 +60,7 @@ app.whenReady().then(() => {
 
       // Adiciona o resultado do OCR à lista
       ocrResults.push({ textArray });
+      console.log(textArray)
       
       // Envia os resultados do OCR para a janela principal do Electron
       mainWindow.webContents.send('ocr-result', ocrResults);
@@ -93,4 +95,16 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+// Setup the express server to send OCR results
+const expressApp = express();
+expressApp.use(cors());
+
+expressApp.get('/ocr-results', (req, res) => {
+  res.json(ocrResults);
+});
+
+expressApp.listen(4000, () => {
+  console.log('Express server listening on port 4000');
 });
