@@ -71,21 +71,14 @@ app.whenReady().then(() => {
       const [result] = await client.textDetection({ image: { content: croppedBuffer } });
       const textArray = result.textAnnotations.map(annotation => annotation.description).filter(text => text.trim() !== '');
 
-<<<<<<< HEAD
-    // Pega apenas o primeiro elemento do array e coloca no campo "codigo"
-    const resultObject = { codigo: textArray[0] };
-    console.log(resultObject.codigo);
+      // Pega apenas o primeiro elemento do array e coloca no campo "codigo"
+      const resultObject = { codigo: textArray[0] };
+      console.log(resultObject.codigo);
 
-    // Atualiza a lista de resultados e salva no MongoDB
-    ocrResults.push(resultObject);
-    await saveToDatabase(resultObject);;
+      // Atualiza a lista de resultados e salva no MongoDB
+      ocrResults.push(resultObject);
+      await saveToDatabase(resultObject);;
 
-=======
-      // Adiciona o resultado do OCR à lista
-      ocrResults.push({ textArray });
-      console.log(textArray)
-      
->>>>>>> f86e159754d56a78abed14db24910b29f1bf57d4
       // Envia os resultados do OCR para a janela principal do Electron
       mainWindow.webContents.send('ocr-result', ocrResults);
     } catch (err) {
