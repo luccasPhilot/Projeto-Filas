@@ -11,8 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/vision": "^4.3.2",
+<<<<<<< HEAD
     "dotenv": "^16.4.5",
+=======
+    "cors": "^2.8.5",
+>>>>>>> f86e159754d56a78abed14db24910b29f1bf57d4
     "electron": "^32.0.1",
+    "express": "^4.19.2",
     "jimp": "^0.22.12",
     "mongodb": "^6.8.0",
     "screenshot-desktop": "^1.15.0"

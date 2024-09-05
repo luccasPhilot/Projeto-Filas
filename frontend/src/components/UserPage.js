@@ -8,6 +8,7 @@ import Alert from './Alert';
 import Pronto from './prontos';
 import Proximo from './proximos';
 import Chamando from './Chamando';
+import MinhaSenha from './MinhaSenha';
 
 function UserPage() {
   const [itens, setItens] = useState([]);
@@ -78,7 +79,7 @@ function UserPage() {
             <div className="prontos-scroll">
               {mostrandoProntos && (
                 <ul className="prontos">
-                  {itens.map(cadaItem => (
+                  {(cadaItem => (
                     (cadaItem.ordem === 0 && cadaItem.codigo) ? (
                       <li key={cadaItem.codigo}>
                         <Pronto
@@ -96,22 +97,16 @@ function UserPage() {
               </button>
             </div>
           </div>
-
-          {/*
-            <div className="prontos-scroll">
-              <ul className="prontos">
-                {itens.map(cadaItem => (
-                  (cadaItem.ordem === 0) ? (
-                    <Pronto
-                      highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                      log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                    />
-                  ) : null
-                ))}
-              </ul>
-            </div>
-          */}
         </div>
+        
+          <div className='container-minha-senha'>
+            { /*highlightedSenha !== null ? <MinhaSenha item={String(highlightedSenha)} />
+              :
+              console.log("não")
+            }*/
+            }
+          </div> 
+        
         <div className="container-proximos">
           <ul className="proximo">
             {itens.map(cadaItem => (

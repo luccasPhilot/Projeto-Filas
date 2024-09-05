@@ -2,6 +2,12 @@ const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const screenshot = require('screenshot-desktop');
 const Jimp = require('jimp');
 const path = require('path');
+<<<<<<< HEAD
+=======
+const express = require('express');
+const cors = require('cors');
+
+>>>>>>> f86e159754d56a78abed14db24910b29f1bf57d4
 const vision = require('@google-cloud/vision');
 const { API_KEY } = require('./config');
 const db = require("./db")
@@ -65,6 +71,7 @@ app.whenReady().then(() => {
       const [result] = await client.textDetection({ image: { content: croppedBuffer } });
       const textArray = result.textAnnotations.map(annotation => annotation.description).filter(text => text.trim() !== '');
 
+<<<<<<< HEAD
     // Pega apenas o primeiro elemento do array e coloca no campo "codigo"
     const resultObject = { codigo: textArray[0] };
     console.log(resultObject.codigo);
@@ -73,6 +80,12 @@ app.whenReady().then(() => {
     ocrResults.push(resultObject);
     await saveToDatabase(resultObject);;
 
+=======
+      // Adiciona o resultado do OCR à lista
+      ocrResults.push({ textArray });
+      console.log(textArray)
+      
+>>>>>>> f86e159754d56a78abed14db24910b29f1bf57d4
       // Envia os resultados do OCR para a janela principal do Electron
       mainWindow.webContents.send('ocr-result', ocrResults);
     } catch (err) {
@@ -106,4 +119,16 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+// Setup the express server to send OCR results
+const expressApp = express();
+expressApp.use(cors());
+
+expressApp.get('/ocr-results', (req, res) => {
+  res.json(ocrResults);
+});
+
+expressApp.listen(4000, () => {
+  console.log('Express server listening on port 4000');
 });
