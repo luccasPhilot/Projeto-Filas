@@ -8,7 +8,7 @@ async function connectToDB() {
     const client = new MongoClient(process.env.MONGO_HOST);
 
     await client.connect();
-    console.log('Connected successfully to MongoDB server');
+    console.log('Conectado ao Server (React-DB)');
 
     singleton = client.db(process.env.MONGO_DATABASE);
     return singleton;

@@ -1,11 +1,10 @@
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
-
 const screenshot = require('screenshot-desktop');
-const Jimp = require('jimp'); // for crop
+const Jimp = require('jimp');
 const path = require('path');
-
 const vision = require('@google-cloud/vision');
 const { API_KEY } = require('./config');
+const db = require("./db")
 
 // Instancia o cliente do Google Cloud Vision
 const client = new vision.ImageAnnotatorClient({
@@ -15,6 +14,15 @@ const client = new vision.ImageAnnotatorClient({
 let mainWindow;
 let captureEnabled = true;
 let ocrResults = []; // Lista para armazenar resultados do OCR
+
+const saveToDatabase = async (data) => {
+  try {
+    const result = await db.insertDocuments(data);
+    return result;
+  } catch (error) {
+    console.error('Erro ao salvar no banco de dados:', error);
+  }
+};
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -57,9 +65,14 @@ app.whenReady().then(() => {
       const [result] = await client.textDetection({ image: { content: croppedBuffer } });
       const textArray = result.textAnnotations.map(annotation => annotation.description).filter(text => text.trim() !== '');
 
-      // Adiciona o resultado do OCR à lista
-      ocrResults.push({ textArray });
-      
+    // Pega apenas o primeiro elemento do array e coloca no campo "codigo"
+    const resultObject = { codigo: textArray[0] };
+    console.log(resultObject.codigo);
+
+    // Atualiza a lista de resultados e salva no MongoDB
+    ocrResults.push(resultObject);
+    await saveToDatabase(resultObject);;
+
       // Envia os resultados do OCR para a janela principal do Electron
       mainWindow.webContents.send('ocr-result', ocrResults);
     } catch (err) {
