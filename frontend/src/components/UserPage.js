@@ -98,15 +98,14 @@ function UserPage() {
             </div>
           </div>
         </div>
-        
-          <div className='container-minha-senha'>
-            { /*highlightedSenha !== null ? <MinhaSenha item={String(highlightedSenha)} />
-              :
-              console.log("não")
-            }*/
-            }
-          </div> 
-        
+
+        <div className='container-minha-senha'>
+          {/* Exibe a senha inserida no modal */}
+          {highlightedSenha !== null ? (
+            <MinhaSenha item={String(highlightedSenha)} />
+          ) : null}
+        </div>
+
         <div className="container-proximos">
           <ul className="proximo">
             {itens.map(cadaItem => (

@@ -1,8 +1,9 @@
-function MinhaSenha(item) {
+function MinhaSenha({ item }) {
     return (
-        <p>
-            {item}
-        </p>
-    )
+        <div className="minha-senha">
+            <p>Sua senha: <strong>{item}</strong></p>
+        </div>
+    );
 }
-export default MinhaSenha
+
+export default MinhaSenha;
