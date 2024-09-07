@@ -23,7 +23,19 @@ async function insertDocuments(document) {
     }
 }
 
+async function findMaxOrder() {
+    try {
+        const db = await connectToDB();
+        const result = await db.collection("dados-fila").findOne({}, { sort: { ordem: -1 }, projection: { ordem: 1 } });
+        return result ? result.ordem : 0; // Retorna o maior valor de ordem ou 0 se não houver nenhum
+    } catch (err) {
+        throw new Error('Erro ao buscar o maior valor de ordem:', err);
+    }
+}
+  
+
 module.exports = {
     connectToDB,
-    insertDocuments
+    insertDocuments,
+    findMaxOrder
 };

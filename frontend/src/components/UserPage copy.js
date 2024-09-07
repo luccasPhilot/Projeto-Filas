@@ -17,30 +17,28 @@ function UserPage() {
       .then(data => setItens(data));
   }
 
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
+
   useEffect(() => {
     getData()
     setIsAlertOpen(true)
   }, []);
 
-  const [isAlertOpen, setIsAlertOpen] = useState(false)
   const handleCloseAlert = () => {
     setIsAlertOpen(false);
   }
 
   const [highlightedSenha, setHighlightedSenha] = useState(null);
+
   const handleConfirmAlert = (foundItem) => {
     setHighlightedSenha(foundItem.codigo);
+
     setIsAlertOpen(false);
   };
 
   const [mostrandoProntos, setMostrandoProntos] = useState(false);
   function VerChamados() {
     setMostrandoProntos(!mostrandoProntos);
-  };
-
-  const [mostrandoTodos, setMostrandoTodos] = useState(false);
-  function VerTodos() {
-    setMostrandoTodos(!mostrandoTodos);
   };
 
   return (
@@ -93,68 +91,25 @@ function UserPage() {
                 </ul>
 
               )}
+              <button onClick={VerChamados}>
+                Ver já chamados
+              </button>
             </div>
           </div>
         </div>
-        {highlightedSenha ? (
-
+        <div className="container-proximos">
           <ul className="proximo">
-            <div className="container-proximos">
-
-            <div className="senha-user">
-              {!mostrandoTodos && (
-                <p>Sua senha</p>
-              )}
-
-              <button className="ver-tudo" onClick={VerTodos}>
-                Ver toda a Fila
-              </button>
-            </div>
-
-              {itens.map(cadaItem => (
-                (cadaItem.codigo === highlightedSenha) && !mostrandoTodos ? (
-                  <Proximo
-                    item={cadaItem}
-                    highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                    log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                  />
-                ) : null
-              ))}
-            </div>
-
-            <div className="container-proximos">
-              {itens.map(cadaItem => (
-                mostrandoTodos ? (
-                  <Proximo
-                    item={cadaItem}
-                    highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                    log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                  />
-                ) : null
-              ))}
-            </div>
+            {itens.map(cadaItem => (
+              cadaItem.ordem !== 0 && cadaItem.ordem !== -1 ? (
+                <Proximo
+                  item={cadaItem}
+                  highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                  log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
+                />
+              ) : null
+            ))}
           </ul>
-
-        ) : (
-
-          <div className="container-proximos">
-            <button onClick={VerChamados}>
-                Ver já chamados
-            </button>
-            <ul className="proximo">
-              {itens.map(cadaItem => (
-                cadaItem.ordem !== 0 && cadaItem.ordem !== -1 ? (
-                  <Proximo
-                    item={cadaItem}
-                    highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                    log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                  />
-                ) : null
-              ))}
-            </ul>
-          </div>
-
-        )}
+        </div>
       </div>
       <script src="/script.js"></script>
     </div>

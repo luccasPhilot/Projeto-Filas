@@ -60,6 +60,13 @@
                 ocrItem.appendChild(text);
                 
                 resultsDiv.appendChild(ocrItem);
+
+                // Adiciona a imagem capturada
+                const image = document.createElement('img');
+                image.src = result.imageBase64;
+                ocrItem.appendChild(image);
+
+                resultsDiv.appendChild(ocrItem);
             });
         });
 

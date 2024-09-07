@@ -81,6 +81,29 @@
 }
 
 .highlighted {
-    background-color: rgb(113, 201, 113);
+    background-color: #B17A5B;
     color: white;
+}
+
+.senha-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.ver-tudo {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none; 
+    color: inherit;
+    padding: 0; 
+    cursor: pointer;
+    color: #B17A5B;
+}
+.ver-tudo:hover {
+    font-weight: bold; 
 }

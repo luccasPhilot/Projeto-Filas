@@ -4,7 +4,8 @@ const Jimp = require('jimp');
 const path = require('path');
 const vision = require('@google-cloud/vision');
 const { API_KEY } = require('./config');
-const db = require("./db")
+const db = require("./db");
+const { isUndefined } = require('util');
 
 // Instancia o cliente do Google Cloud Vision
 const client = new vision.ImageAnnotatorClient({
@@ -44,6 +45,16 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
 
+  const getMaxOrder = async () => {
+    try {
+      const maxOrder = await db.findMaxOrder();
+      return maxOrder
+    } catch (error) {
+      console.error('Erro ao buscar o maior valor de ordem:', error);
+      return 0;
+    }
+  };
+
   globalShortcut.register('z', async () => {
     if (!captureEnabled) return;
 
@@ -61,23 +72,32 @@ app.whenReady().then(() => {
       image.crop(x, y, width, height);
       const croppedBuffer = await image.getBufferAsync(Jimp.MIME_PNG);
 
+      // Converte a imagem para base64
+      const imageBase64 = `data:image/png;base64,${croppedBuffer.toString('base64')}`;
+
       // Usa o Google Cloud Vision API para reconhecer o texto
       const [result] = await client.textDetection({ image: { content: croppedBuffer } });
       const textArray = result.textAnnotations.map(annotation => annotation.description).filter(text => text.trim() !== '');
 
-    // Pega apenas o primeiro elemento do array e coloca no campo "codigo"
-    const resultObject = { codigo: textArray[0] };
-    console.log(resultObject.codigo);
+      // Obtém o maior valor de ordem atual e incrementa
+      const maxOrder = await getMaxOrder();
+      const newOrder = maxOrder + 1;
 
-    // Atualiza a lista de resultados e salva no MongoDB
-    ocrResults.push(resultObject);
-    await saveToDatabase(resultObject);;
+      // Cria o objeto com o novo valor de ordem e a imagem
+      const resultObject = { codigo: textArray[0], ordem: newOrder, imageBase64 };
+      console.log(resultObject.codigo, resultObject.ordem);
 
-      // Envia os resultados do OCR para a janela principal do Electron
-      mainWindow.webContents.send('ocr-result', ocrResults);
-    } catch (err) {
-      console.error('Error capturing screen:', err);
-    }
+      // Atualiza a lista de resultados e salva no MongoDB
+      if (resultObject.codigo) {
+        ocrResults.push(resultObject);
+        await saveToDatabase(resultObject);
+      }
+
+        // Envia os resultados do OCR para a janela principal do Electron
+        mainWindow.webContents.send('ocr-result', ocrResults);
+      } catch (err) {
+        console.error('Error capturing screen:', err);
+      }
   });
 
   globalShortcut.register('x', () => {
