@@ -38,8 +38,10 @@ function UserPage() {
     setMostrandoProntos(!mostrandoProntos);
   };
 
+  const [verMais, setVerMais] = useState(true);
   const [mostrandoTodos, setMostrandoTodos] = useState(false);
   function VerTodos() {
+    setVerMais(!verMais);
     setMostrandoTodos(!mostrandoTodos);
   };
 
@@ -105,7 +107,7 @@ function UserPage() {
 
               <div className="senha-user">
                 <button className="ver-tudo" onClick={VerTodos}>
-                  Ver toda a Fila
+                  <label>{verMais ? "Ver já chamados" : "Ver menos"}</label>
                 </button>
                 {!mostrandoTodos && (
                   <p>Sua senha</p>
