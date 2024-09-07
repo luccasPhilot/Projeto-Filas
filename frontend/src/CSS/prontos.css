@@ -1,9 +1,8 @@
 .container-prontos {
-    width: 90%; 
-    margin: 0 auto; /* Remove o margin-bottom e margin-top especificados */
-    padding: 5px 20px; /* Remove o padding-bottom se não for necessário */
-    height: auto; /* Ajusta a altura automaticamente para o conteúdo */
-    box-sizing: border-box; /* Inclui padding e border na altura e largura total */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px 20px;
+    height: auto;
     overflow: hidden;
 }
 
@@ -11,12 +10,18 @@
     display: flex;
     overflow-x: auto;
     padding-bottom: 10px;
+    scrollbar-width: none; /* Oculta a barra de rolagem no Firefox */
+}
+
+.prontos-scroll::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem no Chrome, Safari e Edge */
 }
 
 .prontos {
     display: flex;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .chamando {
@@ -26,42 +31,48 @@
     color: #fff;
     font-size: 45px;
     background-color: #BE0E19;
-    height: 220px;
+    height: 180px;
     border-radius: 30px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    position: relative; 
+    margin: 15px 0 20px 0;
+    position: relative;
     padding-top: 8px;
 }
+
 .pos {
     position: absolute;
-    top: 12px; /* Ajuste a distância do topo */
-    left: 20px; /* Ajuste a distância da esquerda */
-    font-size: 30px; /* Ajuste o tamanho do número conforme necessário */
-    color: #fff; /* Cor do número */
+    top: 12px;
+    left: 20px;
+    font-size: 30px;
+    color: #fff;
 }
+
 .chamando p {
     position: absolute;
-    top: 20px; /* Ajuste conforme necessário */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Ajusta para centralizar o texto */
-    padding: 5px; /* Espaçamento interno */
-    font-size: 25px
-
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
 }
+
+.chamando h1 {
+    font-size: 1em;
+}
+
 .name {
     position: absolute;
-    top: 170px; /* Posiciona logo abaixo do <h1> */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Ajusta para centralizar o texto */
-    padding: 5px; /* Espaçamento interno */
-    font-size: 22px; /* Ajuste o tamanho da fonte conforme necessário */
-    white-space: nowrap; /* Impede que o texto se quebre em várias linhas */
+    top: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    font-size: 22px;
+    white-space: nowrap;
 }
 
 .naoveio {
     display: flex;
-    justify-content: flex-end; /* Alinha os itens à direita */
+    justify-content: flex-end;
     width: 100%;
     color: #909090;
 }
@@ -82,24 +93,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
     background-color: white;
     border: 1px solid #e0e0e0;
 }
 
 .titulo-prontos {
-    margin-left: 0;
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.prontos-scroll::-webkit-scrollbar {
-    height: 0px; /* altura da barra de rolagem horizontal */
+    margin: 0 0 10px 0;
 }
 
 .highlighted {
-    background-color: rgb(113, 201, 113);
+    background-color: #71C971;
     color: white;
 }

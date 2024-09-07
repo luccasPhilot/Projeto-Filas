@@ -61,7 +61,7 @@ function UserPage() {
               <img className="seta" src="./img/arrow.png" alt="voltar" />
               <h1 className="logo">FILA</h1>
             </div>
-            <h1 className="rest">Restaurante</h1>
+            <a href='https://www.burgerking.com.br' className="rest" target='blank'>Restaurante</a>
           </nav>
         </header>
         <div className="container-prontos">
@@ -101,15 +101,15 @@ function UserPage() {
           <ul className="proximo">
             <div className="container-proximos">
 
-            <div className="senha-user">
-              {!mostrandoTodos && (
-                <p>Sua senha</p>
-              )}
+              <div className="senha-user">
+                <button className="ver-tudo" onClick={VerTodos}>
+                  Ver toda a Fila
+                </button>
+                {!mostrandoTodos && (
+                  <p>Sua senha</p>
+                )}
 
-              <button className="ver-tudo" onClick={VerTodos}>
-                Ver toda a Fila
-              </button>
-            </div>
+              </div>
 
               {itens.map(cadaItem => (
                 (cadaItem.codigo === highlightedSenha) && !mostrandoTodos ? (
@@ -139,7 +139,7 @@ function UserPage() {
 
           <div className="container-proximos">
             <button onClick={VerChamados}>
-                Ver já chamados
+              Ver já chamados
             </button>
             <ul className="proximo">
               {itens.map(cadaItem => (

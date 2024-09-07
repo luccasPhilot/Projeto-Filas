@@ -1,5 +1,5 @@
 .container-proximos {
-    width: 90%;
+    width: 100%;
     margin: 0px auto 0;
     padding: 0px 20px 0px;
 }
@@ -86,17 +86,16 @@
 }
 
 .senha-user {
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     position: relative; 
     font-size: 23px;
     font-weight: 600;
+    
 }
 
 .ver-tudo {
-    position: absolute;
-    right: 0;
     background: none;
     border: none; 
     color: inherit;
@@ -104,6 +103,7 @@
     cursor: pointer;
     color: #B17A5B;
 }
+
 .ver-tudo:hover {
     font-weight: bold; 
 }
