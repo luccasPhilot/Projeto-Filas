@@ -42,7 +42,8 @@
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    font-weight: 400;
+    font-weight: 300;
+    font-size: 1.7em;  
 }
 .code {
     margin-right: 10px;
@@ -101,8 +102,8 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    position: relative; 
-    font-size: 23px;
+    position: relative;
+    font-size: 20px;
 }
 
 .ver-tudo {
@@ -111,9 +112,5 @@
     color: inherit;
     padding: 0; 
     cursor: pointer;
-    color: #B17A5B;
-}
-
-.ver-tudo:hover {
-    font-weight: bold; 
+    color: #9d9d9d;
 }
