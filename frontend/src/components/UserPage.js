@@ -58,8 +58,10 @@ function UserPage() {
         <header>
           <nav className="navigation">
             <div class="left-group">
+            <a href="http://localhost:3001/user" className="logo-link">
               <img className="seta" src="./img/arrow.png" alt="voltar" />
               <h1 className="logo">FILA</h1>
+            </a>
             </div>
             <a href='https://www.burgerking.com.br' className="rest" target='blank'>Restaurante</a>
           </nav>

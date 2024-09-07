@@ -1,7 +1,7 @@
 .container-prontos {
     width: 100%;
     margin: 0 auto;
-    padding: 0px 20px;
+    padding: 0px 10px;
     height: auto;
     overflow: hidden;
 }
@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 45px;
+    font-size: 4em;
     background-color: #BE0E19;
     height: 180px;
     border-radius: 30px;

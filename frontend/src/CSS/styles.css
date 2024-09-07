@@ -24,7 +24,7 @@ header h1 {
     display: flex;
     justify-content: space-between; /* Distribui o espaço entre os itens */
     align-items: center; /* Alinha itens verticalmente */
-    padding: 18px 40px;
+    padding: 0px 15px;
     width: 100%;
     transition: all 0.5s;
 }
@@ -35,9 +35,11 @@ header h1 {
 .seta {
     width: 20px;
     height: 20px;
+    margin-top: 3px;
 }
 .logo {
-    margin-left: 10px; /* Espaçamento opcional entre seta e logo */
+    margin-left: 10px;
+    color: black;
 }
 .rest {
     font-weight: 600;
@@ -80,3 +82,8 @@ Large Desktops
 
 /* Frameworks: Considere usar frameworks como Bootstrap ou Tailwind CSS
 que oferecem suporte a responsividade e podem acelerar o desenvolvimento. */
+
+.logo-link {
+    display: flex;
+    text-decoration: none;
+}

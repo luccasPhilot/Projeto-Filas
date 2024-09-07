@@ -5,7 +5,7 @@ function Chamando({ item }) {
         {/*
         <div className='pos'>1º</div>
         */}
-        <p>Senha Atual</p>
+        <p>Senha atual</p>
         <h1>{item.codigo}</h1>
         <div className='name'>{item.text}</div>
       </li>
