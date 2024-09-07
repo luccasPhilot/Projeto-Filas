@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+}
+
 .container-proximos {
     width: 100%;
     margin: 0px auto 0;
@@ -35,6 +42,7 @@
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    font-weight: 400;
 }
 .code {
     margin-right: 10px;
@@ -71,7 +79,7 @@
 .titulo-proximos {
     margin-left: 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 800;
     margin-bottom: 10px;
 }
 
@@ -83,6 +91,10 @@
 .highlighted {
     background-color: #B17A5B;
     color: white;
+    font-weight: 800;
+}
+.highlighted p {
+    font-weight: 700;
 }
 
 .senha-user {
@@ -91,8 +103,6 @@
     align-items: center;
     position: relative; 
     font-size: 23px;
-    font-weight: 600;
-    
 }
 
 .ver-tudo {
