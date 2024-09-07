@@ -142,6 +142,7 @@ function AdminPage() {
         </div>
 
         <ul className = "chamandoo">
+          <p>Chamando</p>
           { 
             itensToShow.map(item => 
               { 
@@ -155,6 +156,7 @@ function AdminPage() {
         </ul>
 
         <ul className = "pronto">
+          <p>Chamados</p>
           { 
             itensToShow.map(item => {
               if (item.ordem === 0) {
@@ -166,6 +168,7 @@ function AdminPage() {
         </ul>
 
         <ul className = "proximo">
+          <p>Próximos</p>
           { 
             itensToShow.map(item => {
               if ((item.ordem!==0) && (item.ordem!==-1)) {

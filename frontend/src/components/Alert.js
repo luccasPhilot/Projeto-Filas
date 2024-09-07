@@ -29,10 +29,10 @@ const Alert = ({ isOpen, onClose, onConfirm, lista }) => {
       overlayClassName="custom-overlay"
     >
       <div className="custom-modal-header">
-        <button onClick={onClose} className="close-button">X</button>
+        {/*<button onClick={onClose} className="close-button">X</button>*/}
       </div>
       <div className="custom-modal-body">
-        <h2>Qual o seu código?</h2>
+        <h2 className='alert-text'>Qual a sua senha?</h2>
         <input
           type="text"
           value={inputValue}
@@ -47,8 +47,8 @@ const Alert = ({ isOpen, onClose, onConfirm, lista }) => {
           ))}
         </datalist>
         <div className="modal-buttons">
-          <button onClick={onClose} className="cancel-button">Cancel</button>
-          <button onClick={handleConfirm} className="confirm-button">Confirm</button>
+          <button onClick={onClose} className="cancel-button">Cancelar</button>
+          <button onClick={handleConfirm} className="confirm-button">Continuar</button>
         </div>
       </div>
     </Modal>
