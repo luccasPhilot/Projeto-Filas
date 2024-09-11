@@ -1,72 +1,81 @@
-import {useState} from "react"
+import { useState } from "react";
 
 function Item({ item, updateDocument, deleteDocument, updateFila, updateVoltar }) {
-  const [tempText, setTempText] = useState(item.text)
-  const [tempCod, setTempCod] = useState(item.codigo)
+  const [tempText, setTempText] = useState(item.text);
+  const [tempCod, setTempCod] = useState(item.codigo);
 
   return (
-    <li className="filas"
+    <li
+      className="fila-adm"
       style={{
-        backgroundColor: item.ordem===-1 ? "#e3e971" : (item.ordem===0 ? "#B17A5B" : "#dbdbdb")
+        backgroundColor:
+          item.ordem === -1 ? "#ffffff" : item.ordem === 0 ? "#ffffff" : "#ffffff",
       }}
     >
-      <div className="lugar">
-        <p>{item.ordem}º</p>
+      <div className="pos-adm">
+        <p>{
+            item.ordem === 0 ? item.ordem
+            : item.ordem === -1 ? item.ordem+2
+            : item.ordem+1
+          }
+        º</p>
       </div>
-      
-      {((item.edit) || (item.text === "")) 
-        ?
-        <input 
-          className="filas-content"
-          value={tempText}
-          type="text" 
-          onChange={(e) => {setTempText(e.target.value)}}
-          onBlur={
-            () => {updateDocument({...item, text: tempText, edit: false})
-            setTempText(tempText)
-          }}
-        />
-        :
-        <span 
-          className="filas-content"
-          onClick={() => {updateDocument({ ...item, edit: true })}}
-        >{item.text}</span>
-      }
-      
-      {((item.editcod) || (item.codigo === "")) 
-        ?
-        <input 
-          className="filas-codigo"
-          value={tempCod}
-          type="text" 
-          onChange={(e) => {setTempCod(e.target.value)}}
-          onBlur={
-            () => {updateDocument({...item, codigo: tempCod, editcod: false})
-            setTempCod(tempCod)
-          }}
-        />
-        :
-        <span 
-          className="filas-codigo"
-          onClick={() => {updateDocument({ ...item, editcod: true })}}
-        >{item.codigo}</span>
-      }
- 
-      <div className="buttons">
+
+      {/* Campo de texto sempre como input */}
+      <input
+        className="nome-adm"
+        value={tempText}
+        type="text"
+        onChange={(e) => {
+          setTempText(e.target.value);
+        }}
+        onBlur={() => {
+          updateDocument({ ...item, text: tempText, edit: false });
+          setTempText(tempText);
+        }}
+      />
+
+      {/* Campo de código sempre como input */}
+      <input
+        className="senha-adm"
+        value={tempCod}
+        type="text"
+        onChange={(e) => {
+          setTempCod(e.target.value);
+        }}
+        onBlur={() => {
+          updateDocument({ ...item, codigo: tempCod, editcod: false });
+          setTempCod(tempCod);
+        }}
+      />
+
+      <div className="btn-adm">
         {(item.ordem === 0 || item.ordem === -1) && (
-          <button className="btn voltar"
-          onClick={() => {updateVoltar({ ...item, active: !item.active })}}
-          >voltar</button>
+          <button
+            className="btn-adm-voltar"
+            onClick={() => {
+              updateVoltar({ ...item, active: !item.active });
+            }}
+          >
+            voltar
+          </button>
         )}
 
-        <button className="btn del" onClick={() => {(deleteDocument(item))}}>Apagar</button>
-        
-        <button className="btn chamar" onClick={() => {updateFila(item)
-        }}
-        >Chamar</button>
+        <button
+          className="btn-adm-del"
+          onClick={() => {
+            updateFila(item);
+          }}
+        >
+          Chamar
+        </button>
+
+        <button className="btn-adm-del" onClick={() => deleteDocument(item)}>
+          X
+        </button>
       </div>
     </li>
-  )
+  );
 }
 
-export default Item
+export default Item;

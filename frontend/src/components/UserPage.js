@@ -3,6 +3,7 @@ import '../CSS/alert.css';
 import '../CSS/styles.css';
 import '../CSS/prontos.css';
 import '../CSS/proximos.css';
+import '../CSS/admin.css';
 
 import Alert from './Alert';
 import Pronto from './prontos';

@@ -1,28 +1,16 @@
-import { useState, useEffect } from 'react'
-import Pronto from './prontosadm'
+import { useState, useEffect } from 'react';
+import Pronto from './prontosadm';
 
 function AdminPage() {
+  const [itens, setItens] = useState([]);
+  const [filtro, setFiltro] = useState('todos'); // Estado para o filtro
 
-  const [itens, setItens] = useState([])
-  const [filterItens, setFilterItens] = useState({filter: false, active: false})
-
-  function getData(){
-    fetch('http://localhost:3000/fila/list', {method:"GET"})
-    .then(response => response.json())
-    .then(data => setItens(data))
+  function getData() {
+    fetch('http://localhost:3000/fila/list', { method: "GET" })
+      .then(response => response.json())
+      .then(data => setItens(data));
   }
 
-  /*async function getLastCodigo() {
-    try {
-      const response = await fetch('http://localhost:3000/fila/list');
-      const data = await response.json();
-      const maxCodigo = data.reduce((max, item) => (item.codigo > max ? item.codigo : max), 0);
-      return maxCodigo;
-    } catch (error) {
-      console.error("Erro ao obter a lista de itens:", error);
-      return 0; // Retorna 0 se houver um erro
-    }
-  }*/
   async function getLastItem() {
     try {
       const response = await fetch('http://localhost:3000/fila/list');
@@ -31,157 +19,136 @@ function AdminPage() {
       return ordemItem;
     } catch (error) {
       console.error("Erro ao obter a lista de itens:", error);
-      return 0; // Retorna 0 se houver um erro
+      return 0;
     }
   }
 
-  async function insertDocument(){
-  //const lastCodigo = await getLastCodigo();
-  const lastItem = await getLastItem();
-    
-    const newItem = lastItem + 1;
-    //const newCodigo = lastCodigo + 10;
-    fetch('http://localhost:3000/fila/add',
-      { 
-        method:"POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({"text": "", "active": true, "codigo": (newItem*100), "ordem": newItem})
-      }
-    )
-    .then(response => response.json())
-    .then(() => getData())
-  }
-
-  /*async function insertDocument(){
+  async function insertDocument() {
     const lastItem = await getLastItem();
-      
-      const newItem = lastItem + 1;
-      fetch('http://localhost:3000/fila/add',
-        { 
-          method:"POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({"text": "", "active": true, "codigo": "", "ordem": newItem})
-        }
-      )
+    const newItem = lastItem + 1;
+    fetch('http://localhost:3000/fila/add', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "text": "", "active": true, "codigo": (newItem * 100), "ordem": newItem })
+    })
       .then(response => response.json())
-      .then(() => getData())
-  }
-  */
-  function updateDocument(item){
-    fetch('http://localhost:3000/fila/update',
-      { 
-        method:"PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      }
-    )
-    .then(response => response.json())
-    .then(() => getData())
-  }
-  function updateFila(item){
-    fetch('http://localhost:3000/fila/updatefila',
-      { 
-        method:"PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      }
-    )
-    .then(response => response.json())
-    .then(() => getData())
-  }
-  function updateVoltar(item){
-    fetch('http://localhost:3000/fila/voltar',
-      { 
-        method:"PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      }
-    )
-    .then(response => response.json())
-    .then(() => getData())
+      .then(() => getData());
   }
 
-  async function deleteDocument(item){
-    fetch('http://localhost:3000/fila/delete',
-      { 
-        method:"DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(item)
-      }
-    )
-    .then(response => response.json())
-    .then(() => getData())
+  function updateDocument(item) {
+    fetch('http://localhost:3000/fila/update', {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(() => getData());
+  }
+
+  function updateFila(item) {
+    fetch('http://localhost:3000/fila/updatefila', {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(() => getData());
+  }
+
+  function updateVoltar(item) {
+    fetch('http://localhost:3000/fila/voltar', {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(() => getData());
+  }
+
+  async function deleteDocument(item) {
+    fetch('http://localhost:3000/fila/delete', {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(() => getData());
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
-  const itensToShow = filterItens.filter ? itens.filter(item => item.active === filterItens.active) : itens
+  // Filtra os itens com base no filtro selecionado
+  const itensFiltrados = itens.filter(item => {
+    if (filtro === 'todos') return true;
+    if (filtro === 'pronto') return item.ordem === -1 || item.ordem === 0;
+    if (filtro === 'proximos') return item.ordem !== -1 && item.ordem !== 0;
+    return false;
+  });
 
   return (
     <div className="wrapper">
       <div className="container-proximos">
-        <h1>To Do App</h1>
+        <h1 className='titulo-adm'>FILA CATUAI</h1>
 
-        <div className="filtro">
-          <button 
-          style={filterItens.filter ? {} : {fontWeight: "bold"}}
-          onClick={() => setFilterItens({filter: false})}>Todos</button>
-
-          <button 
-          style={((filterItens.filter) && (filterItens.active)) ? {} : {fontWeight: "bold"}}
-          onClick={() => setFilterItens({filter: true, active: false})}
-          >Pendentes</button>
-
-          <button 
-          style={((filterItens.filter) &&  (!filterItens.active))
-             ? {} : {fontWeight: "bold"}}
-          onClick={() => setFilterItens({filter: true, active: true})}
-          >Concluídos</button>
+        <div className="filtros">
+          <button className='btn-novo' onClick={insertDocument}>Inserir Novo</button>
+          
+          <label htmlFor="filtro"></label>
+          <select
+            id="filtro"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          >
+            <option value="todos">Todos</option>
+            <option value="pronto">Pronto</option>
+            <option value="proximos">Próximos</option>
+          </select>
         </div>
 
-        <ul className = "chamandoo">
-          <p>Chamando</p>
-          { 
-            itensToShow.map(item => 
-              { 
-                if (item.ordem === -1) {
-                  return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
-                }
-                return null
-              }
-            )
-          }
-        </ul>
+        {/* Lista de itens filtrados */}
+        {itensFiltrados.length > 0 ? (
+          <>
+            {filtro === 'todos' || filtro === 'pronto' ? (
+              <ul className="chamandoo">
+                <p className='p-fila'>Chamados</p>
+                {itensFiltrados.map(item => {
+                  if (item.ordem === -1) {
+                    return <Pronto key={item.codigo} item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar} />;
+                  }
+                  return null;
+                })}
+              </ul>
+            ) : null}
 
-        <ul className = "pronto">
-          <p>Chamados</p>
-          { 
-            itensToShow.map(item => {
-              if (item.ordem === 0) {
-                return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
-              }
-              return null
-            })
-          }
-        </ul>
+            {filtro === 'todos' || filtro === 'pronto' ? (
+              <ul className="pronto">
+                <p className='p-fila'>Chamados</p>
+                {itensFiltrados.map(item => {
+                  if (item.ordem === 0) {
+                    return <Pronto key={item.codigo} item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar} />;
+                  }
+                  return null;
+                })}
+              </ul>
+            ) : null}
 
-        <ul className = "proximo">
-          <p>Próximos</p>
-          { 
-            itensToShow.map(item => {
-              if ((item.ordem!==0) && (item.ordem!==-1)) {
-                return <Pronto item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar}/>
-              }
-              return null
-            })
-          }
-        </ul>
-        
-        <div className="novo">
-          <button onClick={insertDocument}>Inserir Novo</button>
-        </div>
+            {filtro === 'todos' || filtro === 'proximos' ? (
+              <ul className="proximo">
+                <p className='p-fila'>Próximos</p>
+                {itensFiltrados.map(item => {
+                  if (item.ordem !== 0 && item.ordem !== -1) {
+                    return <Pronto key={item.codigo} item={item} updateDocument={updateDocument} deleteDocument={deleteDocument} updateFila={updateFila} updateVoltar={updateVoltar} />;
+                  }
+                  return null;
+                })}
+              </ul>
+            ) : null}
+          </>
+        ) : (
+          <p className='p-fila'>Nenhum item encontrado</p>
+        )}
       </div>
     </div>
   );
