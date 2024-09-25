@@ -40,8 +40,13 @@ router.patch("/voltar", checkBody, async (req, res) => {
     res.send(results)
 });
 
-router.delete("/delete", checkBody, async (req, res) => { //apagar item da base
+router.delete("/delete", checkBody, async (req, res) => {
     const results = await db.removeDocument(req.body)
+    res.send(results)
+});
+
+router.patch("/chamar", checkBody, async (req, res) => {
+    const results = await db.chamarFila(req.body)
     res.send(results)
 });
 

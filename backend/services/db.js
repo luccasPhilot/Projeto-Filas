@@ -108,20 +108,55 @@ async function updateFila(document) {
 async function removeDocument(document) {
     const db = await connectToDB();
     const collection = db.collection('dados-fila');
-    const ordemRemovido = document.ordem
+    const posicaoRemovido = document.posicao
   
     try {
       await collection.deleteOne({ _id: document._id });
-      if (ordemRemovido > 0) {
+      if (posicaoRemovido > 0) {
         await collection.updateMany(
-            { ordem: { $gt: ordemRemovido } }, //gt = greater than (maior que)
-            { $inc: { ordem: -1 } } // incrementa
+            { posicao: { $gt: posicaoRemovido } }, //gt = greater than (maior que)
+            { $inc: { posicao: -1 } } // incrementa
         )
       }
       return { success: true }
     } catch (err) {
         throw new Error(err)
     }
+}
+
+async function chamarFila(document) {
+    const db = await connectToDB()
+    const collection = db.collection('dados-fila')
+    const posicaoAntes = document.posicao
+    const statusAntes = document.status
+    
+    try {
+        if((statusAntes !== 1)) {
+            const existeStatus1 = await collection.findOne({ status: 1 });
+            if (existeStatus1) {
+                await collection.updateOne(
+                    { _id: existeStatus1._id },
+                    { $set: { status: 2, posicao: 0} }
+                );
+            }
+            if (posicaoAntes > 1) {
+                await collection.updateMany(
+                    { posicao: { $gt: posicaoAntes } }, //gt = greater than (maior que)
+                    { $inc: { posicao: -1 } } // incrementa
+                )
+              }
+
+            await collection.updateOne(
+                { _id: document._id },
+                { $set: { ...document, status: 1, posicao: 1 }}
+            );
+        }
+    
+        return { success: true }
+    } catch (err) {
+        throw new Error(err)
+    }
+
 }
 
 module.exports = {
@@ -131,5 +166,6 @@ module.exports = {
     updateDocument,
     removeDocument,
     updateFila,
-    updateVoltar
+    updateVoltar,
+    chamarFila
 };
