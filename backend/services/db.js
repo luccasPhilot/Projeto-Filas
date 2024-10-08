@@ -44,12 +44,12 @@ async function updateVoltar(document) {
 
     try {
             await collection.updateMany(
-                { ordem: { $gt: 0} },
-                { $inc: { ordem: +1 } },
+                { posicao: { $gt: 1} },
+                { $inc: { posicao: +1 } },
             )
             await collection.updateOne(
                 { _id: document._id },
-                { $set: { ...document, ordem: 1 }}
+                { $set: { ...document, posicao: 2 }}
             )
     
         return { success: true }
