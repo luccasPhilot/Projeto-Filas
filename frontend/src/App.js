@@ -18,20 +18,23 @@ function App() {
       .then(data => setItens(data));
   }
 
-  useEffect(() => {
-    getData()
-    setIsAlertOpen(true)
-  }, []);
-
+  const [jaAbriu, setJaAbriu] = useState(false)
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const handleCloseAlert = () => {
     setIsAlertOpen(false);
   }
 
+  const [singleton, setSingleton] = useState(false)
   const [highlightedSenha, setHighlightedSenha] = useState(null);
+  const [highlightedStatus, setHighlightedStatus] = useState(null);
   const handleConfirmAlert = (foundItem) => {
     setHighlightedSenha(foundItem.codigo);
     setIsAlertOpen(false);
+    setHighlightedStatus(foundItem.status);
+    setJaAbriu(true)
+    if (!singleton) {
+      setSingleton(true);
+    }
   };
 
   const [mostrandoProntos, setMostrandoProntos] = useState(false);
@@ -45,6 +48,17 @@ function App() {
     setVerMais(!verMais);
     setMostrandoTodos(!mostrandoTodos);
   };
+
+  useEffect(() => {
+    getData()
+    if (!jaAbriu) {
+      setIsAlertOpen(true)
+    }
+
+    if (highlightedStatus === 2) {
+      setMostrandoProntos(true);
+    }
+  }, [singleton]);
 
   return (
     <div className="App">
@@ -72,7 +86,7 @@ function App() {
         <div className="container-prontos">
           <div>
             {itens.map(cadaItem => (
-              (cadaItem.ordem === -1) ? (
+              (cadaItem.status === 1) ? (
                 <Chamando
                   item={cadaItem}
                   highlighted={Number(highlightedSenha) === Number(cadaItem.codigo)}
@@ -86,7 +100,7 @@ function App() {
               {mostrandoProntos && (
                 <ul className="prontos">
                   {itens.map(cadaItem => (
-                    (cadaItem.ordem === 0 && cadaItem.codigo) ? (
+                    (cadaItem.status === 2) ? (
                       <li key={cadaItem.codigo}>
                         <Pronto
                           item={cadaItem}
@@ -105,10 +119,12 @@ function App() {
 
           <ul className="proximo">
             <div className="container-proximos">
-
+              <button onClick={VerChamados}>
+                Ver já chamados
+              </button>
               <div className="senha-user">
                 <button className="ver-tudo" onClick={VerTodos}>
-                  <label>{verMais ? "Ver já chamados" : "Ver menos"}</label>
+                  <label>{verMais ? "Ver Todos da Fila" : "Ver menos"}</label>
                 </button>
                 {!mostrandoTodos && (
                   <p>Sua senha</p>
@@ -117,7 +133,7 @@ function App() {
               </div>
 
               {itens.map(cadaItem => (
-                (cadaItem.codigo === highlightedSenha) && !mostrandoTodos ? (
+                (cadaItem.status === 3) && !mostrandoTodos ? (
                   <Proximo
                     item={cadaItem}
                     highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
