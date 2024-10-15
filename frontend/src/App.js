@@ -94,74 +94,73 @@ function App() {
               ) : null
             ))}
           </div>
-
+          <button onClick={VerChamados}>
+              <label>{mostrandoProntos ? "Ver Menos" : "Ver Já Chamados"}</label>
+          </button>
           <div className='naoveio'>
-            <div className="prontos-scroll">
               {mostrandoProntos && (
-                <ul className="prontos">
-                  {itens.map(cadaItem => (
-                    (cadaItem.status === 2) ? (
-                      <li key={cadaItem.codigo}>
-                        <Pronto
-                          item={cadaItem}
-                          highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                        />
-                      </li>
-                    ) : null
-                  ))}
-                </ul>
-
+                <div className="prontos-scroll">
+                    <p>Já Chamados:</p>
+                    <ul className="prontos">
+                      {itens.map(cadaItem => (
+                        (cadaItem.status === 2) ? (
+                          <li key={cadaItem.codigo}>
+                            <Pronto
+                              item={cadaItem}
+                              highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                            />
+                          </li>
+                        ) : null
+                      ))}
+                    </ul>
+                </div>
               )}
-            </div>
           </div>
         </div>
         {highlightedSenha ? (
+          <div className="container-proximos">
+            <ul className="proximo">
+              <div className="container-proximos">
+                <div className="senha-user">
+                  <button className="ver-tudo" onClick={VerTodos}>
+                    <label>{verMais ? "Ver Todos da Fila" : "Ver menos"}</label>
+                  </button>
+                  {!mostrandoTodos && (
+                    <p>Sua senha</p>
+                  )}
 
-          <ul className="proximo">
-            <div className="container-proximos">
-              <button onClick={VerChamados}>
-                Ver já chamados
-              </button>
-              <div className="senha-user">
-                <button className="ver-tudo" onClick={VerTodos}>
-                  <label>{verMais ? "Ver Todos da Fila" : "Ver menos"}</label>
-                </button>
-                {!mostrandoTodos && (
-                  <p>Sua senha</p>
-                )}
+                </div>
 
+                {itens.map(cadaItem => (
+                  (cadaItem.status === 3) && !mostrandoTodos ? (
+                    highlightedSenha === cadaItem.codigo ? (
+                      <Proximo
+                        item={cadaItem}
+                        highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                        log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
+                      />
+                    ) : null
+                  ) : null
+                ))}
               </div>
 
-              {itens.map(cadaItem => (
-                (cadaItem.status === 3) && !mostrandoTodos ? (
-                  <Proximo
-                    item={cadaItem}
-                    highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                    log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                  />
-                ) : null
-              ))}
-            </div>
-
-            <div className="container-proximos">
-              {itens.map(cadaItem => (
-                mostrandoTodos ? (
-                  <Proximo
-                    item={cadaItem}
-                    highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
-                    log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
-                  />
-                ) : null
-              ))}
-            </div>
-          </ul>
+              <div className="container-proximos">
+                {itens.map(cadaItem => (
+                  (cadaItem.status === 3) && mostrandoTodos ? (
+                    <Proximo
+                      item={cadaItem}
+                      highlighted={String(highlightedSenha) === String(cadaItem.codigo)}
+                      log={() => console.log(`highlightedSenha: ${highlightedSenha}, cadaItem.codigo: ${cadaItem.codigo}`)}
+                    />
+                  ) : null
+                ))}
+              </div>
+            </ul>
+          </div>
 
         ) : (
 
           <div className="container-proximos">
-            <button onClick={VerChamados}>
-              Ver já chamados
-            </button>
             <ul className="proximo">
               {itens.map(cadaItem => (
                 cadaItem.ordem !== 0 && cadaItem.ordem !== -1 ? (

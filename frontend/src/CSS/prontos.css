@@ -14,24 +14,6 @@
     overflow: hidden;
 }
 
-.prontos-scroll {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    scrollbar-width: none; /* Oculta a barra de rolagem no Firefox */
-}
-
-.prontos-scroll::-webkit-scrollbar {
-    display: none; /* Oculta a barra de rolagem no Chrome, Safari e Edge */
-}
-
-.prontos {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .chamando {
     display: flex;
     align-items: center;
@@ -78,11 +60,24 @@
     white-space: nowrap;
 }
 
+.prontos-scroll::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem no Chrome, Safari e Edge */
+}
 .naoveio {
     display: flex;
-    justify-content: flex-end;
     width: 100%;
     color: #909090;
+}
+.naoveio p {
+    margin-right: auto;
+    width: 100%;
+}
+.prontos {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 0;
 }
 
 .chamando span {
